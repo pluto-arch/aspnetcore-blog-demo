@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  pluto.netcoretemplate.api:
+    image: ${DOCKER_REGISTRY-}templateService
+    container_name: templateService
+    build:
+      context: .
+      dockerfile: src/Pluto.BlogCore.API/Dockerfile
