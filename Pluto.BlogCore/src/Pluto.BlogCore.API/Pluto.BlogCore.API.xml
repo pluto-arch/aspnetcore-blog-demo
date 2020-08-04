@@ -33,61 +33,6 @@
             <param name="logger"></param>
             <param name="eventIdProvider"></param>
         </member>
-        <member name="T:Pluto.BlogCore.API.Controllers.UserController">
-            <summary>
-            Demo 控制器
-            </summary>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.UserController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Pluto.BlogCore.API.Controllers.UserController},Pluto.BlogCore.Infrastructure.Providers.EventIdProvider,Pluto.BlogCore.Application.Queries.Interfaces.IUserQueries)">
-            <summary>
-            
-            </summary>
-            <param name="mediator"></param>
-            <param name="logger"></param>
-            <param name="eventIdProvider"></param>
-            <param name="userQueries"></param>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.UserController.Users">
-            <summary>
-            获取所有用户  GET: api/users
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.UserController.Users(System.Int32)">
-            <summary>
-            根据id获取一个用户 GET: api/users/{id}
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.UserController.UserRoles(System.Int32)">
-            <summary>
-            获取用户的所有角色 / GET: api/users/{id}/roles
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.UserController.PostAsync(Pluto.BlogCore.API.Models.Requests.CreateUserRequest)">
-            <summary>
-            创建用户 POST: api/users
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.UserController.Put(System.Int32,Pluto.BlogCore.API.Models.Requests.PutUserRequest)">
-            <summary>
-            全部更新
-            </summary>
-            <param name="id"></param>
-            <param name="request"></param>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.UserController.Delete(System.Int32)">
-            <summary>
-            删除一个用户 DELETE: api/demo/5
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
         <member name="T:Pluto.BlogCore.API.Filters.ModelValidateFilter">
             <summary>
             model 验证过滤器

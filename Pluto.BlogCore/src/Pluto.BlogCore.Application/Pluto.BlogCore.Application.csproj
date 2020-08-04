@@ -33,6 +33,8 @@
 
   <ItemGroup>
     <Folder Include="GrpcServices\Protos\" />
+    <Folder Include="Queries\Impls" />
+    <Folder Include="Queries\Interfaces" />
   </ItemGroup>
 
   <ItemGroup>

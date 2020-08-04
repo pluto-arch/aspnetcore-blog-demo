@@ -25,21 +25,6 @@
             <typeparam name="TRequest"></typeparam>
             <typeparam name="TResponse"></typeparam>
         </member>
-        <member name="T:Pluto.BlogCore.Application.CommandBus.CreateUserCommandHandler">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.CommandBus.CreateUserCommandHandler.#ctor(MediatR.IMediator,PlutoData.Interface.IUnitOfWork{Pluto.BlogCore.Infrastructure.PlutoBlogCoreDbContext})">
-            <summary>
-            
-            </summary>
-            <param name="mediator"></param>
-            <param name="unitOfWork"></param>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.CommandBus.DeleteUserCommandHandler.Handle(Pluto.BlogCore.Application.Commands.DeleteUserCommand,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommandHandler`2.Handle(Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommand{`0,`1},System.Threading.CancellationToken)">
             <summary>
             这个方法处理命令。它只是确保不存在具有相同ID的其他请求，如果是这种情况，则只对原始内部命令进行排队。
@@ -81,41 +66,6 @@
             </summary>
             <param name="userName"></param>
             <param name="password"></param>
-        </member>
-        <member name="T:Pluto.BlogCore.Application.Queries.UserQueries">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.Queries.UserQueries.#ctor(PlutoData.Interface.IUnitOfWork{Pluto.BlogCore.Infrastructure.PlutoBlogCoreDbContext})">
-            <summary>
-            
-            </summary>
-            <param name="unitOfWork"></param>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.Queries.UserQueries.GetUsers">
-            <inheritdoc />
-        </member>
-        <member name="M:Pluto.BlogCore.Application.Queries.UserQueries.GetUser(System.Object)">
-            <inheritdoc />
-        </member>
-        <member name="T:Pluto.BlogCore.Application.Queries.Interfaces.IUserQueries">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IUserQueries.GetUsers">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IUserQueries.GetUser(System.Object)">
-            <summary>
-            
-            </summary>
-            <param name="key"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>
