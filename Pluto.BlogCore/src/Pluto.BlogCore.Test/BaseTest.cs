@@ -28,6 +28,7 @@ namespace Pluto.BlogCore.Test
         [SetUp]
         public void Setup()
         {
+
             var services = new ServiceCollection();
 
             var config = new ConfigurationBuilder()

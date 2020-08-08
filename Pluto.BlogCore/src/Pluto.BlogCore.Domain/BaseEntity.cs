@@ -32,7 +32,8 @@ namespace Pluto.BlogCore.Domain
     public class BaseEntity<TKey> : Entity, IAggregateRoot
     {
         public virtual TKey Id { get; set; }
-
+        public DateTime CreateTime { get; set; }
+        public DateTime ModifyTime { get; set; }
 
         public override int GetHashCode()
         {

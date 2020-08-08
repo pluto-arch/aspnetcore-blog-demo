@@ -8,11 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />
-    <PackageReference Include="PlutoData" Version="1.3.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="IRepositories" />
+    <PackageReference Include="PlutoData" Version="1.4.0" />
   </ItemGroup>
 
 </Project>

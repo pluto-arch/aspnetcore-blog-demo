@@ -10,8 +10,8 @@ using Pluto.BlogCore.Infrastructure;
 namespace Pluto.BlogCore.API.Migrations
 {
     [DbContext(typeof(PlutoBlogCoreDbContext))]
-    [Migration("20200802071302_init_db")]
-    partial class init_db
+    [Migration("20200807022456_change_post_author")]
+    partial class change_post_author
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,10 +29,24 @@ namespace Pluto.BlogCore.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)")
+                        .HasMaxLength(64);
+
+                    b.Property<DateTime>("CreateTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTime>("ModifyTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Id");
 
@@ -42,42 +56,53 @@ namespace Pluto.BlogCore.API.Migrations
             modelBuilder.Entity("Pluto.BlogCore.Domain.DomainModels.Blog.Post", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("CategoryId")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime>("CreateTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime>("ModifyTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(32)");
+
                     b.Property<string>("Summary")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("Id", "Title", "CategoryId");
 
                     b.ToTable("Post");
                 });
 
             modelBuilder.Entity("Pluto.BlogCore.Domain.DomainModels.Blog.PostTag", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<long>("PostId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("TagId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
+                    b.HasKey("PostId", "TagId");
 
                     b.HasIndex("TagId");
 
@@ -91,11 +116,23 @@ namespace Pluto.BlogCore.API.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreateTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("ModifyTime")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
                     b.Property<string>("TagName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(32)")
+                        .HasMaxLength(32);
 
                     b.HasKey("Id");
 
@@ -108,6 +145,34 @@ namespace Pluto.BlogCore.API.Migrations
                         .WithMany("Posts")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
+
+                    b.OwnsOne("Pluto.BlogCore.Domain.DomainModels.Blog.Author", "Author", b1 =>
+                        {
+                            b1.Property<long>("PostId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Avatar")
+                                .HasColumnName("AuthorAvatar")
+                                .HasColumnType("nvarchar(512)")
+                                .HasMaxLength(512);
+
+                            b1.Property<string>("Name")
+                                .HasColumnName("AuthorName")
+                                .HasColumnType("nvarchar(256)")
+                                .HasMaxLength(256);
+
+                            b1.Property<string>("OpenId")
+                                .HasColumnName("AuthorOpenId")
+                                .HasColumnType("nvarchar(256)")
+                                .HasMaxLength(256);
+
+                            b1.HasKey("PostId");
+
+                            b1.ToTable("Post");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PostId");
+                        });
                 });
 
             modelBuilder.Entity("Pluto.BlogCore.Domain.DomainModels.Blog.PostTag", b =>

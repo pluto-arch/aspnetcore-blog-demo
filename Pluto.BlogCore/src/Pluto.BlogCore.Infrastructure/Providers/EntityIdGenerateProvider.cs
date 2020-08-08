@@ -1,0 +1,13 @@
+﻿using System;
+
+namespace Pluto.BlogCore.Infrastructure.Providers
+{
+	public static class EntityIdGenerateProvider
+	{
+		public static long GenerateLongId()
+		{
+			byte[] buffer = Guid.NewGuid().ToByteArray();
+			return BitConverter.ToInt64(buffer, 0);
+		}
+	}
+}

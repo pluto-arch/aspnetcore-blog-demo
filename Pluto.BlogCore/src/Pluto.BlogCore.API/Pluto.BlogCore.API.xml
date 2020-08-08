@@ -33,6 +33,20 @@
             <param name="logger"></param>
             <param name="eventIdProvider"></param>
         </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.PostController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Pluto.BlogCore.API.Controllers.PostController},Pluto.BlogCore.Infrastructure.Providers.EventIdProvider)">
+            <summary>
+            
+            </summary>
+            <param name="mediator"></param>
+            <param name="logger"></param>
+            <param name="eventIdProvider"></param>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.PostController.Post">
+            <summary>
+            创建post
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Pluto.BlogCore.API.Filters.ModelValidateFilter">
             <summary>
             model 验证过滤器
@@ -143,6 +157,12 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="M:Pluto.BlogCore.API.Models.ApiResponse`1.Fail">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Pluto.BlogCore.API.Models.ApiResponseExtensions">
             <summary>
             扩展
@@ -189,87 +209,30 @@
             资源异常
             </summary>
         </member>
-        <member name="T:Pluto.BlogCore.API.Models.Requests.CreateUserRequest">
+        <member name="T:Pluto.BlogCore.API.Models.Requests.CreatePostRequest">
             <summary>
-            创建用户http request
+            创建Post
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.CreateUserRequest.UserName">
+        <member name="P:Pluto.BlogCore.API.Models.Requests.CreatePostRequest.Title">
             <summary>
             邮箱
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.CreateUserRequest.Password">
+        <member name="P:Pluto.BlogCore.API.Models.Requests.CreatePostRequest.Summary">
             <summary>
             密码
             </summary>
         </member>
-        <member name="M:Pluto.BlogCore.API.Models.Requests.CreateUserRequest.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+        <member name="P:Pluto.BlogCore.API.Models.Requests.CreatePostRequest.CategoryId">
+            <summary>
+            类目id
+            </summary>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Models.Requests.CreatePostRequest.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
             <summary>Determines whether the specified object is valid.</summary>
             <param name="validationContext">The validation context.</param>
             <returns>A collection that holds failed-validation information.</returns>
-        </member>
-        <member name="T:Pluto.BlogCore.API.Models.Requests.LoginRequest">
-            <summary>
-            登陆
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.LoginRequest.Email">
-            <summary>
-            邮箱
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.LoginRequest.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Models.Requests.LoginRequest.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
-            <summary>
-            
-            </summary>
-            <param name="validationContext"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Pluto.BlogCore.API.Models.Requests.PutUserRequest">
-            <summary>
-            对应 http put 更新 user
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.PutUserRequest.userName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.PutUserRequest.emailConfirmed">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.PutUserRequest.phoneConfirmed">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.PutUserRequest.lockoutEnabled">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.PutUserRequest.accessFailedCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.PutUserRequest.passwordHash">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Requests.PutUserRequest.id">
-            <summary>
-            
-            </summary>
         </member>
         <member name="T:Pluto.BlogCore.API.Models.Responses.AuthResponse">
             <summary>

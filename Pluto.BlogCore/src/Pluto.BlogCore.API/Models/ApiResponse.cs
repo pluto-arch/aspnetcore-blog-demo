@@ -92,6 +92,12 @@ namespace Pluto.BlogCore.API.Models
 		/// <param name="data"></param>
 		/// <returns></returns>
 		public static ApiResponse<T> Success(T data) => new ApiResponse<T>(AppResponseCode.Success, "执行成功", data);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public static ApiResponse<T> Fail() => new ApiResponse<T>(AppResponseCode.Error, "执行失败", default);
+		
 	}
 
 

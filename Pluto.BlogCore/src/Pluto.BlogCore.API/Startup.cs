@@ -159,7 +159,7 @@ namespace Pluto.BlogCore.API
 
 			#region automapper
 
-			services.AddAutoMapper(Assembly.GetEntryAssembly());
+			services.AddAutoMapper(typeof(Pluto.BlogCore.API.AutoMapperProfile),typeof(Pluto.BlogCore.Application.AutoMapperProfile));
 
 			#endregion
 		}
@@ -176,7 +176,6 @@ namespace Pluto.BlogCore.API
 			builder.RegisterModule(new MediatorModule());
 
 			#endregion
-
 
 			#region Application
 
@@ -219,7 +218,7 @@ namespace Pluto.BlogCore.API
 		}
 	}
 
-
+	
 	/// <summary>
 	/// 指定设计时dbcontext 工厂
 	/// code first 迁移时使用

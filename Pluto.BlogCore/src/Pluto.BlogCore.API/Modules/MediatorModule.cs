@@ -23,7 +23,7 @@ namespace Pluto.BlogCore.API.Modules
                 .As<IMediator>()
                 .InstancePerLifetimeScope();
             
-            builder.RegisterAssemblyTypes(typeof(CreateUserCommand).GetTypeInfo().Assembly)
+            builder.RegisterAssemblyTypes(typeof(BaseCommand).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(IRequestHandler<,>)).InstancePerDependency();
 
 
@@ -38,8 +38,9 @@ namespace Pluto.BlogCore.API.Modules
             });
 
 
-            builder.RegisterGeneric(typeof(LoggingBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency(); ;
-            builder.RegisterGeneric(typeof(TransactionBehaviour<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency(); ;
+            builder.RegisterGeneric(typeof(LoggingBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency(); 
+            builder.RegisterGeneric(typeof(AutoSaveChangeBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency(); ;
+            builder.RegisterGeneric(typeof(TransactionBehaviour<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency(); 
         }
     }
 }

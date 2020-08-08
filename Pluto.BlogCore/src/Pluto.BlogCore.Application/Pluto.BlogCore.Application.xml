@@ -4,6 +4,23 @@
         <name>Pluto.BlogCore.Application</name>
     </assembly>
     <members>
+        <member name="M:Pluto.BlogCore.Application.Attributes.AutoSaveChangeAttribute.#ctor(System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:System.Attribute" /> class.</summary>
+        </member>
+        <member name="T:Pluto.BlogCore.Application.Behaviors.AutoSaveChangeBehavior`2">
+            <summary>
+            自动保存
+            </summary>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Behaviors.AutoSaveChangeBehavior`2.Handle(`0,System.Threading.CancellationToken,MediatR.RequestHandlerDelegate{`1})">
+            <summary>
+            Pipeline handler. Perform any additional behavior and await the <paramref name="next" /> delegate as necessary
+            </summary>
+            <param name="request">Incoming request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <param name="next">Awaitable delegate for the next action in the pipeline. Eventually this delegate represents the handler.</param>
+            <returns>Awaitable task returning the <typeparamref name="TResponse" /></returns>
+        </member>
         <member name="T:Pluto.BlogCore.Application.Behaviors.LoggingBehavior`2">
             <summary>
             
@@ -25,6 +42,28 @@
             <typeparam name="TRequest"></typeparam>
             <typeparam name="TResponse"></typeparam>
         </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreatePostCommand,System.Threading.CancellationToken)">
+            <summary>Handles a request</summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Response from the request</returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.SaveTags(System.String[],System.Threading.CancellationToken)">
+            <summary>
+            处理tag
+            </summary>
+            <param name="tags"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.GetPostCategory(System.Nullable{System.Int64})">
+            <summary>
+            获取类目
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
+            <exception cref="T:System.IO.InvalidDataException"></exception>
+        </member>
         <member name="M:Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommandHandler`2.Handle(Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommand{`0,`1},System.Threading.CancellationToken)">
             <summary>
             这个方法处理命令。它只是确保不存在具有相同ID的其他请求，如果是这种情况，则只对原始内部命令进行排队。
@@ -40,32 +79,58 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Pluto.BlogCore.Application.Commands.CreateUserCommand">
+        <member name="T:Pluto.BlogCore.Application.Commands.CreatePostCommand">
             <summary>
             创建账户
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.CreateUserCommand.UserName">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreatePostCommand.Title">
             <summary>
-            用户名
+            标题
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.CreateUserCommand.Password">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreatePostCommand.Summary">
             <summary>
-            密码
+            摘要
             </summary>
         </member>
-        <member name="M:Pluto.BlogCore.Application.Commands.CreateUserCommand.#ctor">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreatePostCommand.CategoryId">
             <summary>
-            
+            所属分类
             </summary>
         </member>
-        <member name="M:Pluto.BlogCore.Application.Commands.CreateUserCommand.#ctor(System.String,System.String)">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreatePostCommand.Author">
             <summary>
-            
+            作者
             </summary>
-            <param name="userName"></param>
-            <param name="password"></param>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreatePostCommand.Tags">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreatePostCommand.IsAutoPhblish">
+            <summary>
+            是否直接发布
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.Models.AuthorModel.OpenId">
+            <summary>
+            openid
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.Models.AuthorModel.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.Models.AuthorModel.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Commands.Models.AuthorModel.#ctor(System.String,System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
         </member>
     </members>
 </doc>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pluto.BlogCore.Infrastructure;
 
 namespace Pluto.BlogCore.API.Migrations
 {
     [DbContext(typeof(PlutoBlogCoreDbContext))]
-    partial class PlutoBlogCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200806145346_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,20 +33,10 @@ namespace Pluto.BlogCore.API.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<DateTime>("CreateTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
-
-                    b.Property<DateTime>("ModifyTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Id");
 
@@ -58,16 +50,6 @@ namespace Pluto.BlogCore.API.Migrations
 
                     b.Property<long?>("CategoryId")
                         .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreateTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<DateTime>("ModifyTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -87,20 +69,27 @@ namespace Pluto.BlogCore.API.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("Id", "Title", "CategoryId");
+                    b.HasIndex("Title", "CategoryId");
 
                     b.ToTable("Post");
                 });
 
             modelBuilder.Entity("Pluto.BlogCore.Domain.DomainModels.Blog.PostTag", b =>
                 {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<long>("PostId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("TagId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("PostId", "TagId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
 
                     b.HasIndex("TagId");
 
@@ -114,18 +103,8 @@ namespace Pluto.BlogCore.API.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreateTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifyTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("TagName")
                         .IsRequired()
@@ -150,19 +129,13 @@ namespace Pluto.BlogCore.API.Migrations
                                 .HasColumnType("bigint");
 
                             b1.Property<string>("Avatar")
-                                .HasColumnName("AuthorAvatar")
-                                .HasColumnType("nvarchar(512)")
-                                .HasMaxLength(512);
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Name")
-                                .HasColumnName("AuthorName")
-                                .HasColumnType("nvarchar(256)")
-                                .HasMaxLength(256);
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("OpenId")
-                                .HasColumnName("AuthorOpenId")
-                                .HasColumnType("nvarchar(256)")
-                                .HasMaxLength(256);
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("PostId");
 

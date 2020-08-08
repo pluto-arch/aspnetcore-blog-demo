@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pluto.BlogCore.Infrastructure;
 
 namespace Pluto.BlogCore.API.Migrations
 {
     [DbContext(typeof(PlutoBlogCoreDbContext))]
-    partial class PlutoBlogCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200807020815_change_init")]
+    partial class change_init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,7 +89,7 @@ namespace Pluto.BlogCore.API.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("Id", "Title", "CategoryId");
+                    b.HasIndex("Title", "CategoryId");
 
                     b.ToTable("Post");
                 });
@@ -150,19 +152,13 @@ namespace Pluto.BlogCore.API.Migrations
                                 .HasColumnType("bigint");
 
                             b1.Property<string>("Avatar")
-                                .HasColumnName("AuthorAvatar")
-                                .HasColumnType("nvarchar(512)")
-                                .HasMaxLength(512);
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("Name")
-                                .HasColumnName("AuthorName")
-                                .HasColumnType("nvarchar(256)")
-                                .HasMaxLength(256);
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("OpenId")
-                                .HasColumnName("AuthorOpenId")
-                                .HasColumnType("nvarchar(256)")
-                                .HasMaxLength(256);
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("PostId");
 
