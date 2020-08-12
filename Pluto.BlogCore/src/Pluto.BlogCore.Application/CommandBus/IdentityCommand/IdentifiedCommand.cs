@@ -9,10 +9,10 @@ namespace Pluto.BlogCore.Application.CommandBus.IdentityCommand
     {
         public T Command { get; }
         public Guid Id { get; }
-        public IdentifiedCommand(T command, Guid id)
+        public IdentifiedCommand(T command)
         {
             Command = command;
-            Id = id;
+            Id = Guid.NewGuid();
         }
     }
 }

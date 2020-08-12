@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -28,7 +29,7 @@ namespace Pluto.BlogCore.Test
         [SetUp]
         public void Setup()
         {
-
+            
             var services = new ServiceCollection();
 
             var config = new ConfigurationBuilder()

@@ -7,6 +7,6 @@ namespace Pluto.BlogCore.Infrastructure.Idempotency
     {
         Task<bool> ExistAsync(Guid id);
 
-        Task CreateRequestForCommandAsync<T>(Guid id);
+        Task CreateRequestForCommandAsync<T>(Guid id,string cmdString);
     }
 }

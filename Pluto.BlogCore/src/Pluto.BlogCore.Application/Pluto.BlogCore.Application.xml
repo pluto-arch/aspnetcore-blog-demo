@@ -4,8 +4,11 @@
         <name>Pluto.BlogCore.Application</name>
     </assembly>
     <members>
-        <member name="M:Pluto.BlogCore.Application.Attributes.AutoSaveChangeAttribute.#ctor(System.Boolean)">
-            <summary>Initializes a new instance of the <see cref="T:System.Attribute" /> class.</summary>
+        <member name="T:Pluto.BlogCore.Application.Attributes.DisableAutoSaveChangeAttribute">
+            <summary>
+            禁用自动SaveChange
+            </summary>
+            <remarks>如果禁用了，需要手动添加unitofwork的SaveChange</remarks>
         </member>
         <member name="T:Pluto.BlogCore.Application.Behaviors.AutoSaveChangeBehavior`2">
             <summary>
@@ -41,43 +44,6 @@
             </summary>
             <typeparam name="TRequest"></typeparam>
             <typeparam name="TResponse"></typeparam>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreatePostCommand,System.Threading.CancellationToken)">
-            <summary>Handles a request</summary>
-            <param name="request">The request</param>
-            <param name="cancellationToken">Cancellation token</param>
-            <returns>Response from the request</returns>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.SaveTags(System.String[],System.Threading.CancellationToken)">
-            <summary>
-            处理tag
-            </summary>
-            <param name="tags"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.GetPostCategory(System.Nullable{System.Int64})">
-            <summary>
-            获取类目
-            </summary>
-            <param name="categoryId"></param>
-            <returns></returns>
-            <exception cref="T:System.IO.InvalidDataException"></exception>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommandHandler`2.Handle(Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommand{`0,`1},System.Threading.CancellationToken)">
-            <summary>
-            这个方法处理命令。它只是确保不存在具有相同ID的其他请求，如果是这种情况，则只对原始内部命令进行排队。
-            </summary>
-            <param name="request"></param>
-            <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommandHandler`2.CreateResultForDuplicateRequest">
-            <summary>
-            如果前一个command已经处理了，直接返回
-            防止重复command
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Pluto.BlogCore.Application.Commands.CreatePostCommand">
             <summary>
@@ -131,6 +97,44 @@
         </member>
         <member name="M:Pluto.BlogCore.Application.Commands.Models.AuthorModel.#ctor(System.String,System.String,System.String)">
             <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreatePostCommand,System.Threading.CancellationToken)">
+            <summary>Handles a request</summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Response from the request</returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.SaveTags(System.String[],System.Threading.CancellationToken)">
+            <summary>
+            处理tag
+            </summary>
+            <param name="tags"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.GetPostCategory(System.Nullable{System.Int64})">
+            <summary>
+            获取类目
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
+            <exception cref="T:System.IO.InvalidDataException"></exception>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommandHandler`2.Handle(Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommand{`0,`1},System.Threading.CancellationToken)">
+            <summary>
+            这个方法处理命令。它只是确保不存在具有相同ID的其他请求
+            重复执行将返回默认值
+            </summary>
+            <param name="message"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.IdentityCommand.IdentifiedCommandHandler`2.CreateResultForDuplicateRequest">
+            <summary>
+            如果前一个command已经处理了，直接返回
+            防止重复command
+            </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>

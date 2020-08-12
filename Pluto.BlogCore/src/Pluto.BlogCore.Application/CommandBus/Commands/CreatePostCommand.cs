@@ -1,10 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using MediatR;
-
-using Pluto.BlogCore.Application.Attributes;
-
-using System.Runtime.Serialization;
 using Pluto.BlogCore.Application.Commands.Models;
 
 namespace Pluto.BlogCore.Application.Commands

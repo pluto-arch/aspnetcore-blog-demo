@@ -36,7 +36,7 @@ namespace Pluto.BlogCore.API
 	{
 		private const string DefaultCorsName = "default";
 
-		private readonly string conntctionString = string.Empty;
+		private readonly string conntctionString;
 
 		public Startup(IConfiguration configuration)
 		{

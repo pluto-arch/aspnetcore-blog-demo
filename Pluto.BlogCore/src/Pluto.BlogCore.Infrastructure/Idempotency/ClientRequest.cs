@@ -7,5 +7,6 @@ namespace Pluto.BlogCore.Infrastructure.Idempotency
         public Guid Id { get; set; }
         public string Name { get; set; }
         public DateTime Time { get; set; }
+        public string RequestData { get; set; }
     }
 }

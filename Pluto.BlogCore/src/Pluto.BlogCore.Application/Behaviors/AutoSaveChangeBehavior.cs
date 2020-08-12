@@ -39,27 +39,17 @@ namespace Pluto.BlogCore.Application.Behaviors
 		public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
 		{
 			var type = request.GetType();
-			// var attr = type.GetCustomAttribute(typeof(AutoSaveChangeAttribute), true) as AutoSaveChangeAttribute;
-			// if (attr==null||!attr.IsEnable)
-			// {
-			// 	var response = await next();
-			// 	return response;
-			// }
-			try
+			var attr = type.GetCustomAttribute(typeof(DisableAutoSaveChangeAttribute), true) as DisableAutoSaveChangeAttribute;
+			if (attr != null)
 			{
-				var response = await next();
-			    var adad= _uow.DbContext.ChangeTracker.Entries();
-				if (_uow.DbContext.ChangeTracker.Entries().Any(x=>x.State!=EntityState.Unchanged))
-				{
-				    await _uow.SaveChangesAsync(cancellationToken);
-				}
-				return response;
+				return await next();
 			}
-			catch (Exception e)
+			var response = await next();
+			if (_uow.DbContext.ChangeTracker.Entries().Any(x => x.State != EntityState.Unchanged))
 			{
-				_logger.LogError(e, $"{typeof(TRequest)} auto saveChange error ：{e.Message}");
-				return default;
+				await _uow.SaveChangesAsync(cancellationToken);
 			}
+			return response;
 		}
 	}
 }

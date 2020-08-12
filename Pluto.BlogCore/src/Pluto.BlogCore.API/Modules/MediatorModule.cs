@@ -7,6 +7,7 @@ using Pluto.BlogCore.Application.Commands;
 
 using System.Reflection;
 using Pluto.BlogCore.Application.EventBus.Users;
+using Pluto.BlogCore.Infrastructure.Idempotency;
 
 namespace Pluto.BlogCore.API.Modules
 {
@@ -41,6 +42,8 @@ namespace Pluto.BlogCore.API.Modules
             builder.RegisterGeneric(typeof(LoggingBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency(); 
             builder.RegisterGeneric(typeof(AutoSaveChangeBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency(); ;
             builder.RegisterGeneric(typeof(TransactionBehaviour<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency(); 
+            
+            builder.RegisterType<RequestManager>().As<IRequestManager>().InstancePerDependency(); 
         }
     }
 }
