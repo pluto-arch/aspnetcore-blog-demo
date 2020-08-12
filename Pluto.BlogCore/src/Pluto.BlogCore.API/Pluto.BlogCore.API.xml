@@ -41,7 +41,19 @@
             <param name="logger"></param>
             <param name="eventIdProvider"></param>
         </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.PostController.Post">
+        <member name="M:Pluto.BlogCore.API.Controllers.PostController.Get">
+            <summary>
+            获取列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.PostController.Get(System.Int64)">
+            <summary>
+            获取详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.PostController.Post(Pluto.BlogCore.API.Models.Requests.CreatePostRequest)">
             <summary>
             创建post
             </summary>
@@ -229,21 +241,20 @@
             类目id
             </summary>
         </member>
+        <member name="P:Pluto.BlogCore.API.Models.Requests.CreatePostRequest.Tags">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.API.Models.Requests.CreatePostRequest.IsSubmit">
+            <summary>
+            是否直接提交
+            </summary>
+        </member>
         <member name="M:Pluto.BlogCore.API.Models.Requests.CreatePostRequest.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
             <summary>Determines whether the specified object is valid.</summary>
             <param name="validationContext">The validation context.</param>
             <returns>A collection that holds failed-validation information.</returns>
-        </member>
-        <member name="T:Pluto.BlogCore.API.Models.Responses.AuthResponse">
-            <summary>
-            授权token 
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.Responses.AuthResponse.Token">
-            <summary>
-            
-            </summary>
-            <value></value>
         </member>
         <member name="M:Pluto.BlogCore.API.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
             <summary>

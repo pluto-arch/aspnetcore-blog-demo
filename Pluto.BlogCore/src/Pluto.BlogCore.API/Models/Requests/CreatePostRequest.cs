@@ -25,28 +25,28 @@ namespace Pluto.BlogCore.API.Models.Requests
 		/// 类目id
 		/// </summary>
 		public long? CategoryId { get; set; }
-		
-		
+
+		/// <summary>
+		/// 标签
+		/// </summary>
+		public string[] Tags { get; set; }
+
+		/// <summary>
+		/// 是否直接提交
+		/// </summary>
+		public bool IsSubmit { get; set; }
 		
 		/// <summary>Determines whether the specified object is valid.</summary>
 		/// <param name="validationContext">The validation context.</param>
 		/// <returns>A collection that holds failed-validation information.</returns>
 		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
 		{
-			return default;
-			// if (UserName.Length < 4)
-			// {
-			// 	yield return new ValidationResult(
-			// 	                                  "用户名长度不够！",
-			// 	                                  new[] {nameof(UserName)});
-			// }
-			//
-			// if (Password.Length < 4)
-			// {
-			// 	yield return new ValidationResult(
-			// 	                                  "密码长度不够！",
-			// 	                                  new[] {nameof(Password)});
-			// }
+			if (Tags.Length > 5)
+			{
+				yield return new ValidationResult(
+				                                  "标签不能超过5个！",
+				                                  new[] {nameof(Tags)});
+			}
 		}
 	}
 }
