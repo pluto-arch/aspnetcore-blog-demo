@@ -6,8 +6,10 @@ using Microsoft.Extensions.Logging;
 using Pluto.BlogCore.API.Models;
 using Pluto.BlogCore.API.Models.Requests;
 using Pluto.BlogCore.Application.Commands;
+using Pluto.BlogCore.Application.Queries.Interfaces;
 using Pluto.BlogCore.Application.ResourceModels;
 using Pluto.BlogCore.Infrastructure.Providers;
+using PlutoData.Collections;
 using AuthorModel = Pluto.BlogCore.Application.Commands.Models.AuthorModel;
 
 namespace Pluto.BlogCore.API.Controllers
@@ -16,6 +18,9 @@ namespace Pluto.BlogCore.API.Controllers
 	[Route("api/posts")]
 	public class PostController:ApiBaseController<PostController>
 	{
+		private readonly IPostQueries _postQueries;
+		
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -25,8 +30,9 @@ namespace Pluto.BlogCore.API.Controllers
 		public PostController(
 			IMediator mediator, 
 			ILogger<PostController> logger, 
-			EventIdProvider eventIdProvider) : base(mediator, logger, eventIdProvider)
+			EventIdProvider eventIdProvider, IPostQueries postQueries) : base(mediator, logger, eventIdProvider)
 		{
+			_postQueries = postQueries;
 		}
 
 		/// <summary>
@@ -34,9 +40,14 @@ namespace Pluto.BlogCore.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
-		public async Task<ApiResponse<IEnumerable<PostListItemModel>>> Get()
+		public async Task<ApiResponse<IPagedList<PostListItemModel>>> Get(string keyWord,int pageIndex,int pageSize)
 		{
-			return ApiResponse<IEnumerable<PostListItemModel>>.Fail();
+			if (pageIndex<=0||pageSize<=0)
+			{
+				return ApiResponse<IPagedList<PostListItemModel>>.Fail("暂无数据");
+			}
+			var list = await _postQueries.GetListAsync(keyWord,pageIndex,pageSize);
+			return ApiResponse<IPagedList<PostListItemModel>>.Success(list);
 		}
 		
 		

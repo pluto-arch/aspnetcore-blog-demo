@@ -136,5 +136,35 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Impls.PostQueries.GetListAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="keyWord"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries.GetListAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取列表
+            </summary>
+            <param name="keyWord"></param>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.ResourceModels.AuthorResourceModel.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.ResourceModels.CategoryModel.#ctor(System.Int64,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.ResourceModels.TagModel.#ctor">
+            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.ResourceModels.TagModel.#ctor(System.Int64,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        </member>
     </members>
 </doc>

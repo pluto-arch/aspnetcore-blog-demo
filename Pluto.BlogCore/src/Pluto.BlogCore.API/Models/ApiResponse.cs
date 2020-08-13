@@ -32,10 +32,6 @@ namespace Pluto.BlogCore.API.Models
 		/// </summary>
 		public string Message { get; set; }
 
-		/// <summary>
-		/// 详细错误信息
-		/// </summary>
-		public string DebugMsg { get; set; }
 
 		/// <summary>
 		/// 默认成功
@@ -96,38 +92,7 @@ namespace Pluto.BlogCore.API.Models
 		/// 
 		/// </summary>
 		/// <returns></returns>
-		public static ApiResponse<T> Fail() => new ApiResponse<T>(AppResponseCode.Error, "执行失败", default);
+		public static ApiResponse<T> Fail(string msg="执行失败") => new ApiResponse<T>(AppResponseCode.Error, msg, default);
 		
-	}
-
-
-	/// <summary>
-	/// 扩展
-	/// </summary>
-	public static class ApiResponseExtensions
-	{
-		/// <summary>
-		/// 添加调试信息
-		/// </summary>
-		/// <param name="this"></param>
-		/// <param name="message"></param>
-		/// <returns></returns>
-		public static ApiResponse AddDebugMessage(this ApiResponse @this, string message)
-		{
-			@this.DebugMsg = message;
-			return @this;
-		}
-
-		/// <summary>
-		/// 添加调试信息
-		/// </summary>
-		/// <param name="this"></param>
-		/// <param name="message"></param>
-		/// <returns></returns>
-		public static ApiResponse<T> AddDebugMessage<T>(this ApiResponse<T> @this, string message)
-		{
-			@this.DebugMsg = message;
-			return @this;
-		}
 	}
 }

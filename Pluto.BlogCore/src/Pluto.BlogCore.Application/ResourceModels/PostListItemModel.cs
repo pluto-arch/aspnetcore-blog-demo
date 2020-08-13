@@ -14,7 +14,7 @@ namespace Pluto.BlogCore.Application.ResourceModels
 
 		public DateTime CreateTime { get; set; }
 
-		public AuthorModel Author { get; set; }
+		public AuthorResourceModel Author { get; set; }
 
 		public CategoryModel Category { get; set; }
 

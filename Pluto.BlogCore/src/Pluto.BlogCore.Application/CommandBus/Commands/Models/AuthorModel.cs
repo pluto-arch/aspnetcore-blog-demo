@@ -22,5 +22,10 @@
 			Name = name;
 			Avatar = avatar;
 		}
+
+		public AuthorModel()
+		{
+			
+		}
 	}
 }

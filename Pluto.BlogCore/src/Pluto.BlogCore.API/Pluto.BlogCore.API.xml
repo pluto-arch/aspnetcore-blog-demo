@@ -33,7 +33,7 @@
             <param name="logger"></param>
             <param name="eventIdProvider"></param>
         </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.PostController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Pluto.BlogCore.API.Controllers.PostController},Pluto.BlogCore.Infrastructure.Providers.EventIdProvider)">
+        <member name="M:Pluto.BlogCore.API.Controllers.PostController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Pluto.BlogCore.API.Controllers.PostController},Pluto.BlogCore.Infrastructure.Providers.EventIdProvider,Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries)">
             <summary>
             
             </summary>
@@ -41,7 +41,7 @@
             <param name="logger"></param>
             <param name="eventIdProvider"></param>
         </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.PostController.Get">
+        <member name="M:Pluto.BlogCore.API.Controllers.PostController.Get(System.String,System.Int32,System.Int32)">
             <summary>
             获取列表
             </summary>
@@ -116,11 +116,6 @@
             提示信息
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.API.Models.ApiResponse.DebugMsg">
-            <summary>
-            详细错误信息
-            </summary>
-        </member>
         <member name="M:Pluto.BlogCore.API.Models.ApiResponse.DefaultSuccess(System.String)">
             <summary>
             默认成功
@@ -169,31 +164,10 @@
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponse`1.Fail">
+        <member name="M:Pluto.BlogCore.API.Models.ApiResponse`1.Fail(System.String)">
             <summary>
             
             </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Pluto.BlogCore.API.Models.ApiResponseExtensions">
-            <summary>
-            扩展
-            </summary>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponseExtensions.AddDebugMessage(Pluto.BlogCore.API.Models.ApiResponse,System.String)">
-            <summary>
-            添加调试信息
-            </summary>
-            <param name="this"></param>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponseExtensions.AddDebugMessage``1(Pluto.BlogCore.API.Models.ApiResponse{``0},System.String)">
-            <summary>
-            添加调试信息
-            </summary>
-            <param name="this"></param>
-            <param name="message"></param>
             <returns></returns>
         </member>
         <member name="T:Pluto.BlogCore.API.Models.AppResponseCode">
