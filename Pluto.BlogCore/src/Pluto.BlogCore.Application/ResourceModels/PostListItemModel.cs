@@ -6,7 +6,7 @@ namespace Pluto.BlogCore.Application.ResourceModels
 {
 	public class PostListItemModel
 	{
-		public long Id { get; set; }
+		public string Id { get; set; }
 		
 		public string Title { get; set; }
 

@@ -11,6 +11,7 @@ namespace Pluto.BlogCore.API.Controllers
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [ApiController]
     public class ApiBaseController<T>:ControllerBase
     {
         /// <summary>

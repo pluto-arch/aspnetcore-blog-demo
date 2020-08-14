@@ -33,6 +33,26 @@
             <param name="logger"></param>
             <param name="eventIdProvider"></param>
         </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.CategoryController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Pluto.BlogCore.API.Controllers.CategoryController},Pluto.BlogCore.Infrastructure.Providers.EventIdProvider)">
+            <summary>
+            
+            </summary>
+            <param name="mediator"></param>
+            <param name="logger"></param>
+            <param name="eventIdProvider"></param>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.CategoryController.Get">
+            <summary>
+            获取全部分类
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.CategoryController.Post(Pluto.BlogCore.API.Models.Requests.CreateCategoryRequest)">
+            <summary>
+            新建分类
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Pluto.BlogCore.API.Controllers.PostController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Pluto.BlogCore.API.Controllers.PostController},Pluto.BlogCore.Infrastructure.Providers.EventIdProvider,Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries)">
             <summary>
             

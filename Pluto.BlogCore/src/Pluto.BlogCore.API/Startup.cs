@@ -257,6 +257,7 @@ namespace Pluto.BlogCore.API
 					                                                                           && level == LogLevel
 						                                                                           .Information)
 				                                                                .AddSerilog()));
+				options.EnableSensitiveDataLogging(true);
 				options.UseSqlServer(sqlConnStr,
 				                     sqlServerOptionsAction: sqlOptions =>
 				                     {

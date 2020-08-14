@@ -7,6 +7,18 @@ namespace Pluto.BlogCore.Domain.DomainModels.Blog
 	/// </summary>
 	public class Category:BaseEntity<long>
 	{
+
+		public Category()
+		{
+			
+		}
+
+		public Category(string categoryName, string displayName)
+		{
+			CategoryName = categoryName;
+			DisplayName = displayName;
+		}
+
 		/// <summary>
 		/// 分类名称
 		/// </summary>

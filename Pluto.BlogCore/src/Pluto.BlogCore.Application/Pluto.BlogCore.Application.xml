@@ -45,6 +45,14 @@
             <typeparam name="TRequest"></typeparam>
             <typeparam name="TResponse"></typeparam>
         </member>
+        <member name="M:Pluto.BlogCore.Application.Commands.CreateCategoryCommand.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateCategoryCommand.DisplayName">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Pluto.BlogCore.Application.Commands.CreatePostCommand">
             <summary>
             创建账户
@@ -98,6 +106,12 @@
         <member name="M:Pluto.BlogCore.Application.Commands.Models.AuthorModel.#ctor(System.String,System.String,System.String)">
             <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
         </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.CreateCategoryCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreateCategoryCommand,System.Threading.CancellationToken)">
+            <summary>Handles a request</summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Response from the request</returns>
+        </member>
         <member name="M:Pluto.BlogCore.Application.CommandBus.CreatePostCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreatePostCommand,System.Threading.CancellationToken)">
             <summary>Handles a request</summary>
             <param name="request">The request</param>
@@ -145,6 +159,13 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Impls.PostQueries.GetAsync(System.Int64)">
+            <summary>
+            查询详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries.GetListAsync(System.String,System.Int32,System.Int32)">
             <summary>
             获取列表
@@ -152,6 +173,13 @@
             <param name="keyWord"></param>
             <param name="pageIndex"></param>
             <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries.GetAsync(System.Int64)">
+            <summary>
+            查询详情
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:Pluto.BlogCore.Application.ResourceModels.AuthorResourceModel.#ctor(System.String,System.String)">

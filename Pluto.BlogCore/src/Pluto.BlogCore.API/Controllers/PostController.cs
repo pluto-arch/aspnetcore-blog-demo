@@ -56,9 +56,14 @@ namespace Pluto.BlogCore.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet("{id}")]
-		public async Task<ApiResponse<PostItemModel>> Get(long id)
+		public async Task<ApiResponse<PostListItemModel>> Get(long id)
 		{
-			return ApiResponse<PostItemModel>.Fail();
+			if (id<=0)
+			{
+				return ApiResponse<PostListItemModel>.Fail("暂无数据");
+			}
+			var model= await _postQueries.GetAsync(id);
+			return ApiResponse<PostListItemModel>.Success(model);
 		}
 		
 		

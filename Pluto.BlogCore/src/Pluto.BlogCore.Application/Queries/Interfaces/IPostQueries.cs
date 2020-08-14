@@ -15,5 +15,12 @@ namespace Pluto.BlogCore.Application.Queries.Interfaces
 		/// <param name="pageSize"></param>
 		/// <returns></returns>
 		Task<IPagedList<PostListItemModel>> GetListAsync(string keyWord, int pageIndex = 1, int pageSize = 20);
+
+		/// <summary>
+		/// 查询详情
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		Task<PostListItemModel> GetAsync(long id);
 	}
 }
