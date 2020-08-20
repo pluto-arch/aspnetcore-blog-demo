@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pluto.BlogCore.Infrastructure;
 
 namespace Pluto.BlogCore.API.Migrations
 {
     [DbContext(typeof(PlutoBlogCoreDbContext))]
-    partial class PlutoBlogCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819143718_add_third_1")]
+    partial class add_third_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

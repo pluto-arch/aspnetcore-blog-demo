@@ -46,7 +46,7 @@ namespace Pluto.BlogCore.Application.Commands
             CategoryId = categoryId;
             Author = author;
             IsAutoPhblish = isAutoPhblish;
-            if (tags.Length>5)
+            if (tags!=null&&tags.Length>5)
             {
                 throw new IndexOutOfRangeException("标签不能多于五个");
             }

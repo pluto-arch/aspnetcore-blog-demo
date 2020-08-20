@@ -30,6 +30,7 @@ namespace Pluto.BlogCore.Infrastructure
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
             modelBuilder.ApplyConfiguration(new PostTagConfiguration());
+            modelBuilder.ApplyConfiguration(new ThirsAuthorizeInfoConfiguration());
         }
         #endregion
 

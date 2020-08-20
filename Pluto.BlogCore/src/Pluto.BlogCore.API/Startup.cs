@@ -28,6 +28,9 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Pluto.BlogCore.API.Filters;
 using Pluto.BlogCore.API.HealthChecks;
+using Pluto.BlogCore.Application.HttpServices;
+using Pluto.BlogCore.Application.HttpServices.Handlers;
+using Pluto.BlogCore.Application.Options;
 
 
 namespace Pluto.BlogCore.API
@@ -162,6 +165,12 @@ namespace Pluto.BlogCore.API
 			services.AddAutoMapper(typeof(Pluto.BlogCore.API.AutoMapperProfile),typeof(Pluto.BlogCore.Application.AutoMapperProfile));
 
 			#endregion
+
+			services.AddHttpClient<YuQueAppService>();
+
+			services.Configure<YuqueOption>(Configuration.GetSection(YuqueOption.Yuque));
+
+
 		}
 
 

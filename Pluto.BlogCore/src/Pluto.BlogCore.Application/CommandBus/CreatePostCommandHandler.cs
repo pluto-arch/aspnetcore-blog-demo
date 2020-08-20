@@ -43,7 +43,7 @@ namespace Pluto.BlogCore.Application.CommandBus
 			                      request.IsAutoPhblish ? EnumPostStatus.Auditing : EnumPostStatus.Draft,
 			                      _mapper.Map<Author>(request.Author));
 			entity.Id = EntityIdGenerateProvider.GenerateLongId();
-			if (request.Tags.Length > 0)
+			if (request.Tags!=null&&request.Tags.Length > 0)
 			{
 				var postTags = SaveTags(request.Tags, cancellationToken);
 				entity.AddTags(postTags);

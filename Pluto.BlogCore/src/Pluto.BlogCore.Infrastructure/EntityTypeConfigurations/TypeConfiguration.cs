@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pluto.BlogCore.Domain.DomainModels.Blog;
+using Pluto.BlogCore.Domain.DomainModels.ThirsOauth;
 
 namespace Pluto.BlogCore.Infrastructure.EntityTypeConfigurations
 {
@@ -109,4 +110,47 @@ namespace Pluto.BlogCore.Infrastructure.EntityTypeConfigurations
 			       .IsRequired(false);
 		}
 	}
+	
+	
+	public class ThirsAuthorizeInfoConfiguration:IEntityTypeConfiguration<ThirsAuthorizeInfo>
+	{
+		public void Configure(EntityTypeBuilder<ThirsAuthorizeInfo> builder)
+		{
+			builder.ToTable("ThirsAuthorizeInfo");
+			builder.HasKey(x => x.Id);
+			builder.HasIndex(x => new {x.OpenId,x.PlatformOpenId});
+			
+			builder.Property(x => x.OpenId)
+			       .HasMaxLength(300)
+			       .IsRequired(true);
+
+			builder.Property(x => x.AccessToken)
+			       .HasMaxLength(1024)
+			       .IsRequired(true);
+			builder.Property(x => x.RefreshToken)
+			       .HasMaxLength(1024)
+			       .IsRequired(true);
+			builder.Property(x => x.PlatformOpenId)
+			       .HasMaxLength(1024)
+			       .IsRequired(true);
+			builder.Property(x => x.Expired)
+			       .IsRequired(false);
+
+			builder.Property(x => x.PlatformName).HasMaxLength(300);
+
+			builder.Property(x => x.PlatformType)
+			       .HasColumnType("nvarchar(32)")
+			       .HasConversion<string>();
+			
+			builder.Property(x => x.CreateTime)
+			       .HasDefaultValueSql("GETDATE()");
+			builder.Property(x => x.ModifyTime)
+			       .HasDefaultValueSql("GETDATE()");
+
+		}
+	}
+	
+	
+	
+	
 }

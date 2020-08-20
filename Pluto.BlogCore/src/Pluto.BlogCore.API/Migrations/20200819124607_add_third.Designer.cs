@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pluto.BlogCore.Infrastructure;
 
 namespace Pluto.BlogCore.API.Migrations
 {
     [DbContext(typeof(PlutoBlogCoreDbContext))]
-    partial class PlutoBlogCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200819124607_add_third")]
+    partial class add_third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,24 +152,16 @@ namespace Pluto.BlogCore.API.Migrations
                         .HasMaxLength(1024);
 
                     b.Property<DateTime>("CreateTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("Expired")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ModifyTime")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OpenId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(300)")
-                        .HasMaxLength(300);
-
-                    b.Property<string>("PlatformName")
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
 

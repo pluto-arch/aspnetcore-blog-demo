@@ -53,14 +53,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.PostController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Pluto.BlogCore.API.Controllers.PostController},Pluto.BlogCore.Infrastructure.Providers.EventIdProvider,Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries)">
-            <summary>
-            
-            </summary>
-            <param name="mediator"></param>
-            <param name="logger"></param>
-            <param name="eventIdProvider"></param>
-        </member>
         <member name="M:Pluto.BlogCore.API.Controllers.PostController.Get(System.String,System.Int32,System.Int32)">
             <summary>
             获取列表

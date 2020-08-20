@@ -23,18 +23,22 @@ namespace Pluto.BlogCore.Test.ApiTest
         [Test]
         public void Id_Demo()
         {
-            var aaa=new List<Thread>();
-            for (int i = 0; i < 10; i++)
-            {
-                new Thread(aad2).Start();
-            }
+
+            IEnumerable<string> ad=new []{"1111","123","!@32"};
+            var ads= ad.Where(x => x.Length < 1);
+            Console.WriteLine(ads);
+            // var aaa=new List<Thread>();
+            // for (int i = 0; i < 10; i++)
+            // {
+            //     new Thread(aad2).Start();
+            // }
 
             // var aaa2=new List<Thread>();
             // for (int i = 0; i < 10; i++)
             // {
             //     aaa2.Add(new Thread(aad2));
             // }
-            
+
         }
 
 

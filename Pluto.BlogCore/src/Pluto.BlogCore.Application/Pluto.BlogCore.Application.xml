@@ -88,6 +88,36 @@
             是否直接发布
             </summary>
         </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.PlatformType">
+            <summary>
+            平台类型
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.OpenId">
+            <summary>
+            本系统用户标识
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.AccessToken">
+            <summary>
+            平台授权accesstoken
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.RefreshToken">
+            <summary>
+            平台刷新token
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.Expired">
+            <summary>
+            平台授权token 过期时间
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.PlatformOpenId">
+            <summary>
+            平台用户标识
+            </summary>
+        </member>
         <member name="P:Pluto.BlogCore.Application.Commands.Models.AuthorModel.OpenId">
             <summary>
             openid
@@ -149,6 +179,130 @@
             防止重复command
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.ThirsAuthorizeInfoCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand,System.Threading.CancellationToken)">
+            <summary>Handles a request</summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Response from the request</returns>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.space_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.account_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.login">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.name">
+            <summary>
+            张玉龙
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.avatar_url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.books_count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.public_books_count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.followers_count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.following_count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.public">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.created_at">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.updated_at">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data._serializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.HttpServices.YuQueAppService.GetAccessToken(System.String)">
+            <summary>
+            换取accesstoken
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Options.YuqueOption.AppName">
+            <summary>
+            语雀创建的第三方应用名称
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Options.YuqueOption.AuthUrl">
+            <summary>
+            语雀Oauth地址
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Options.YuqueOption.ApiUrl">
+            <summary>
+            语雀开放接口地址
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Options.YuqueOption.RedirectUrl">
+            <summary>
+            语雀用户点击同意授权后跳转地址
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Options.YuqueOption.CallbackUrl">
+            <summary>
+            本地跳转地址
+            语雀授权完成后
+            </summary>
         </member>
         <member name="M:Pluto.BlogCore.Application.Queries.Impls.PostQueries.GetListAsync(System.String,System.Int32,System.Int32)">
             <summary>

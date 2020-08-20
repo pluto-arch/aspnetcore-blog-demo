@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Pluto.BlogCore.API.Models;
 using Pluto.BlogCore.API.Models.Requests;
 using Pluto.BlogCore.Application.Commands;
+using Pluto.BlogCore.Application.HttpServices;
 using Pluto.BlogCore.Application.Queries.Interfaces;
 using Pluto.BlogCore.Application.ResourceModels;
 using Pluto.BlogCore.Infrastructure.Providers;
@@ -20,21 +21,15 @@ namespace Pluto.BlogCore.API.Controllers
 	{
 		private readonly IPostQueries _postQueries;
 		
-		
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="mediator"></param>
-		/// <param name="logger"></param>
-		/// <param name="eventIdProvider"></param>
 		public PostController(
 			IMediator mediator, 
 			ILogger<PostController> logger, 
-			EventIdProvider eventIdProvider, IPostQueries postQueries) : base(mediator, logger, eventIdProvider)
+			EventIdProvider eventIdProvider, 
+			IPostQueries postQueries) : base(mediator, logger, eventIdProvider)
 		{
 			_postQueries = postQueries;
 		}
-
+		
 		/// <summary>
 		/// 获取列表
 		/// </summary>
