@@ -9,15 +9,15 @@ using PlutoData.Interface;
 
 namespace Pluto.BlogCore.Application.CommandBus
 {
-    public class ThirsAuthorizeInfoCommandHandler:IRequestHandler<CreateThirsAuthorizeInfoCommand,bool>
+    public class YuqueCommandHandler:IRequestHandler<CreateYuqueAuthInfoCommand,bool>
     {
         private readonly IUnitOfWork<PlutoBlogCoreDbContext> _unitOfWork;
-        private readonly IRepository<ThirsAuthorizeInfo> _repository;
+        private readonly IRepository<YuqueAuthInfo> _repository;
 
-        public ThirsAuthorizeInfoCommandHandler(IUnitOfWork<PlutoBlogCoreDbContext> unitOfWork)
+        public YuqueCommandHandler(IUnitOfWork<PlutoBlogCoreDbContext> unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _repository = _unitOfWork.GetBaseRepository<ThirsAuthorizeInfo>();
+            _repository = _unitOfWork.GetBaseRepository<YuqueAuthInfo>();
         }
 
 
@@ -25,16 +25,15 @@ namespace Pluto.BlogCore.Application.CommandBus
         /// <param name="request">The request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Response from the request</returns>
-        public async Task<bool> Handle(CreateThirsAuthorizeInfoCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CreateYuqueAuthInfoCommand request, CancellationToken cancellationToken)
         {
             var model = await _repository.GetFirstOrDefaultAsync(predicate:x => x.PlatformOpenId == request.PlatformOpenId,cancellationToken:cancellationToken);
             if (model==null)
             {
-                await _repository.InsertAsync(new ThirsAuthorizeInfo
+                await _repository.InsertAsync(new YuqueAuthInfo
                 {
                     CreateTime = DateTime.Now,
                     ModifyTime = DateTime.Now,
-                    PlatformType = request.PlatformType,
                     OpenId = request.OpenId,
                     AccessToken = request.AccessToken,
                     RefreshToken = request.RefreshToken,

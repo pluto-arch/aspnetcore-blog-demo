@@ -112,11 +112,11 @@ namespace Pluto.BlogCore.Infrastructure.EntityTypeConfigurations
 	}
 	
 	
-	public class ThirsAuthorizeInfoConfiguration:IEntityTypeConfiguration<ThirsAuthorizeInfo>
+	public class ThirsAuthorizeInfoConfiguration:IEntityTypeConfiguration<YuqueAuthInfo>
 	{
-		public void Configure(EntityTypeBuilder<ThirsAuthorizeInfo> builder)
+		public void Configure(EntityTypeBuilder<YuqueAuthInfo> builder)
 		{
-			builder.ToTable("ThirsAuthorizeInfo");
+			builder.ToTable("YuqueAuth");
 			builder.HasKey(x => x.Id);
 			builder.HasIndex(x => new {x.OpenId,x.PlatformOpenId});
 			
@@ -138,15 +138,10 @@ namespace Pluto.BlogCore.Infrastructure.EntityTypeConfigurations
 
 			builder.Property(x => x.PlatformName).HasMaxLength(300);
 
-			builder.Property(x => x.PlatformType)
-			       .HasColumnType("nvarchar(32)")
-			       .HasConversion<string>();
-			
 			builder.Property(x => x.CreateTime)
 			       .HasDefaultValueSql("GETDATE()");
 			builder.Property(x => x.ModifyTime)
 			       .HasDefaultValueSql("GETDATE()");
-
 		}
 	}
 	

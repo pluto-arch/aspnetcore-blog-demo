@@ -71,6 +71,27 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.GetYuqueAuthUrl(System.String)">
+            <summary>
+            获取语雀授权跳转地址
+            </summary>
+            <param name="callback">授权回调后的地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.YuqueAuthRedirect(System.String,System.String)">
+            <summary>
+            语雀跳转回调
+            </summary>
+            <param name="code"></param>
+            <param name="state"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.GetDocument(System.String,System.String)">
+            <summary>
+            获取用户的语雀文档
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Pluto.BlogCore.API.Filters.ModelValidateFilter">
             <summary>
             model 验证过滤器

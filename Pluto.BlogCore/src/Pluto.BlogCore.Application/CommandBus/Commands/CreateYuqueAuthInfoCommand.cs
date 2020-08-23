@@ -4,12 +4,8 @@ using Pluto.BlogCore.Domain.DomainModels.ThirsOauth;
 
 namespace Pluto.BlogCore.Application.Commands
 {
-    public class CreateThirsAuthorizeInfoCommand:IRequest<bool>
+    public class CreateYuqueAuthInfoCommand:IRequest<bool>
     {
-        /// <summary>
-        /// 平台类型
-        /// </summary>
-        public EnumPlatformType PlatformType { get; set; }
         
         /// <summary>
         /// 本系统用户标识

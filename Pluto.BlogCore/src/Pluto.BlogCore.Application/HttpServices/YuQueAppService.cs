@@ -52,14 +52,44 @@ namespace Pluto.BlogCore.Application.HttpServices
             return JsonConvert.DeserializeObject<YuQueAccessTokenModel>(responseText);
         }
 
+        /// <summary>
+        /// 获取用语雀户信息
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
         public async Task<YuQueUseInfoModel> GetUserInfoAsync(string accessToken)
         {
-            Client.DefaultRequestHeaders.Add("X-Auth-Token",accessToken);
-            Client.DefaultRequestHeaders.Add("User-Agent",_options.AppName);
+            SetYuqueAuthHeader(accessToken);
             var response=await Client.GetAsync($"{_options.ApiUrl}user");
             var responseText = await response.Content.ReadAsStringAsync();
             _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
             return JsonConvert.DeserializeObject<YuQueUseInfoModel>(responseText);
         }
+
+        
+
+        /// <summary>
+        /// 获取语雀用户知识库
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="accessToken"></param>
+        /// <returns></returns>
+        public async Task<object> GetUserRepos(string id,string accessToken)
+        {
+            SetYuqueAuthHeader(accessToken);
+            var response=await Client.GetAsync($"{_options.ApiUrl}users/{id}/repos?type=all&offset=0");
+            var responseText = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
+            return responseText;
+        }
+        
+        
+        private void SetYuqueAuthHeader(string accessToken)
+        {
+            Client.DefaultRequestHeaders.Add("X-Auth-Token", accessToken);
+            Client.DefaultRequestHeaders.Add("User-Agent", _options.AppName);
+        }
+        
+        
     }
 }

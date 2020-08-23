@@ -88,32 +88,27 @@
             是否直接发布
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.PlatformType">
-            <summary>
-            平台类型
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.OpenId">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateYuqueAuthInfoCommand.OpenId">
             <summary>
             本系统用户标识
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.AccessToken">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateYuqueAuthInfoCommand.AccessToken">
             <summary>
             平台授权accesstoken
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.RefreshToken">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateYuqueAuthInfoCommand.RefreshToken">
             <summary>
             平台刷新token
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.Expired">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateYuqueAuthInfoCommand.Expired">
             <summary>
             平台授权token 过期时间
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand.PlatformOpenId">
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateYuqueAuthInfoCommand.PlatformOpenId">
             <summary>
             平台用户标识
             </summary>
@@ -180,7 +175,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Pluto.BlogCore.Application.CommandBus.ThirsAuthorizeInfoCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreateThirsAuthorizeInfoCommand,System.Threading.CancellationToken)">
+        <member name="M:Pluto.BlogCore.Application.CommandBus.YuqueCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreateYuqueAuthInfoCommand,System.Threading.CancellationToken)">
             <summary>Handles a request</summary>
             <param name="request">The request</param>
             <param name="cancellationToken">Cancellation token</param>
@@ -276,6 +271,21 @@
             换取accesstoken
             </summary>
             <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.HttpServices.YuQueAppService.GetUserInfoAsync(System.String)">
+            <summary>
+            获取用语雀户信息
+            </summary>
+            <param name="accessToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.HttpServices.YuQueAppService.GetUserRepos(System.String,System.String)">
+            <summary>
+            获取语雀用户知识库
+            </summary>
+            <param name="id"></param>
+            <param name="accessToken"></param>
             <returns></returns>
         </member>
         <member name="P:Pluto.BlogCore.Application.Options.YuqueOption.AppName">

@@ -2,13 +2,8 @@
 
 namespace Pluto.BlogCore.Domain.DomainModels.ThirsOauth
 {
-    public class ThirsAuthorizeInfo:BaseEntity<int>
+    public class YuqueAuthInfo:BaseEntity<int>
     {
-        /// <summary>
-        /// 平台类型
-        /// </summary>
-        public EnumPlatformType PlatformType { get; set; }
-        
         /// <summary>
         /// 本系统用户标识
         /// </summary>
