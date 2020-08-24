@@ -13,7 +13,9 @@ using Pluto.BlogCore.API.Models.Response;
 using Pluto.BlogCore.Application.Commands;
 using Pluto.BlogCore.Application.Commands.Models;
 using Pluto.BlogCore.Application.HttpServices;
+using Pluto.BlogCore.Application.HttpServices.Models;
 using Pluto.BlogCore.Application.Options;
+using Pluto.BlogCore.Application.Queries.Interfaces;
 using Pluto.BlogCore.Domain.DomainModels.ThirsOauth;
 using Pluto.BlogCore.Infrastructure.Extensions;
 using Pluto.BlogCore.Infrastructure.Providers;
@@ -26,14 +28,16 @@ namespace Pluto.BlogCore.API.Controllers
     {
         private readonly YuQueAppService _yuQueAppService;
         private readonly YuqueOption _options;
+        private readonly IYuqueAuthQueries _yuqueAuthQueries;
 
         public YuqueController(IMediator mediator,
                                ILogger<YuqueController> logger,
                                EventIdProvider eventIdProvider,
                                YuQueAppService yuQueAppService,
-                               IOptions<YuqueOption> options) : base(mediator, logger, eventIdProvider)
+                               IOptions<YuqueOption> options, IYuqueAuthQueries yuqueAuthQueries) : base(mediator, logger, eventIdProvider)
         {
             _yuQueAppService = yuQueAppService;
+            _yuqueAuthQueries = yuqueAuthQueries;
             _options = options.Value;
         }
 
@@ -74,7 +78,7 @@ namespace Pluto.BlogCore.API.Controllers
                 OpenId = "PO11212112312",
                 AccessToken = tokenResponse.AccessToken,
                 RefreshToken = "",
-                PlatformOpenId = userInfo.Data.AccountId,
+                PlatformOpenId = userInfo.Data.Id,
                 PlatformName = userInfo.Data.Name
             };
             await _mediator.Send(command);
@@ -86,11 +90,21 @@ namespace Pluto.BlogCore.API.Controllers
         /// 获取用户的语雀知识库
         /// </summary>
         /// <returns></returns>
-        [HttpPost("repos")]
-        public async Task<ApiResponse<IEnumerable<YuqueRepoResponse>>> GetRepo(string userid,string accessToken,int page)
+        [HttpGet("repos")]
+        public async Task<ApiResponse<IEnumerable<YuqueRepoResponse>>> GetRepo(int page)
         {
-            var repos =await _yuQueAppService.GetUserRepos(userid, accessToken,page);
-            var response = from repo in repos.Repos
+            if (page<=0)
+            {
+                return ApiResponse<IEnumerable<YuqueRepoResponse>>.Fail("页码错误");
+            }
+            string userid = "PO11212112312";
+            var info =await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
+            if (string.IsNullOrEmpty(info.token))
+            {
+                return ApiResponse<IEnumerable<YuqueRepoResponse>>.Fail("获取token失败");
+            }
+            var repos =await _yuQueAppService.GetUserRepos(info.userId, info.token,page);
+            var response = from repo in repos.Data
                            select new YuqueRepoResponse
                            {
                                Id = repo.Id,
@@ -103,5 +117,42 @@ namespace Pluto.BlogCore.API.Controllers
             return ApiResponse<IEnumerable<YuqueRepoResponse>>.Success(response);
         }
         
+        
+        /// <summary>
+        /// 获取用户的语雀知识库文档
+        /// </summary>
+        /// <param name="repoId">知识库id</param>
+        /// <returns></returns>
+        [HttpGet("repos/{repoId}/docs")]
+        public async Task<ApiResponse<IEnumerable<YuqueDocModel>>> GetDocs(string repoId)
+        {
+            string userid = "PO11212112312";
+            var info =await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
+            if (string.IsNullOrEmpty(info.token))
+            {
+                return ApiResponse<IEnumerable<YuqueDocModel>>.Fail("获取token失败");
+            }
+            var repos =await _yuQueAppService.GetRepoDocs(info.token, repoId);
+            return ApiResponse<IEnumerable<YuqueDocModel>>.Success(repos.Data);
+        }
+        
+        /// <summary>
+        /// 同步用户的语雀知识库文档详情
+        /// </summary>
+        /// <param name="repoId">知识库id</param>
+        /// <param name="slug">文档slug</param>
+        /// <returns></returns>
+        [HttpGet("repos/{repoId}/docs/{slug}")]
+        public async Task<ApiResponse<object>> SyncDoc(string repoId,string slug)
+        {
+            string userid = "PO11212112312";
+            var info =await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
+            if (string.IsNullOrEmpty(info.token))
+            {
+                return ApiResponse<object>.Fail("获取token失败");
+            }
+            var repos =await _yuQueAppService.GetRepoDoc(info.token, repoId,slug);
+            return ApiResponse<object>.Success(repos.Data);
+        }
     }
 }

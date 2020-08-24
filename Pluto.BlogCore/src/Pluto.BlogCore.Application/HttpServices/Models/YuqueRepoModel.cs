@@ -9,17 +9,6 @@ namespace Pluto.BlogCore.Application.HttpServices.Models
     /// </summary>
     public class YuqueRepoModel
     {
-        public YuqueRepoModel()
-        {
-            Repos=new List<Repo>();
-        }
-        
-        [JsonProperty("data")]
-        public List<Repo> Repos { get; set; }
-    }
-
-    public class Repo
-    {
         /// <summary>
         /// 仓库编号
         /// </summary>

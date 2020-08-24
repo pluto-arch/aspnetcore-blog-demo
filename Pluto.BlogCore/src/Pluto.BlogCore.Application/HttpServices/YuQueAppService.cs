@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -31,7 +32,7 @@ namespace Pluto.BlogCore.Application.HttpServices
         {
             var callbacks = HttpUtility.UrlEncode(callback);
             return
-                $"{_options.AuthUrl}authorize?client_id={_options.ClientId}&scope=repo:read,doc:read&redirect_uri={_options.RedirectUrl}&state={callbacks}&response_type=code";
+                $"{_options.AuthUrl}authorize?client_id={_options.ClientId}&scope=repo,doc&redirect_uri={_options.RedirectUrl}&state={callbacks}&response_type=code";
         }
 
 
@@ -60,14 +61,14 @@ namespace Pluto.BlogCore.Application.HttpServices
         /// </summary>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<YuQueUseInfoModel> GetUserInfoAsync(string accessToken)
+        public async Task<YuqueBaseModel<YuQueUseInfoModel>> GetUserInfoAsync(string accessToken)
         {
             SetYuqueAuthHeader(accessToken);
             var response=await Client.GetAsync($"{_options.ApiUrl}user");
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
             _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
-            return JsonConvert.DeserializeObject<YuQueUseInfoModel>(responseText);
+            return JsonConvert.DeserializeObject<YuqueBaseModel<YuQueUseInfoModel>>(responseText);
         }
 
 
@@ -78,24 +79,49 @@ namespace Pluto.BlogCore.Application.HttpServices
         /// <param name="accessToken"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public async Task<YuqueRepoModel> GetUserRepos(string id,string accessToken,int page=1)
+        public async Task<YuqueBaseModel<IEnumerable<YuqueRepoModel>>> GetUserRepos(string id,string accessToken,int page=1)
         {
             SetYuqueAuthHeader(accessToken);
             var response=await Client.GetAsync($"{_options.ApiUrl}users/{id}/repos?type=all&offset={page-1}");
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
             _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
-            return JsonConvert.DeserializeObject<YuqueRepoModel>(responseText);
+            return JsonConvert.DeserializeObject<YuqueBaseModel<IEnumerable<YuqueRepoModel>>>(responseText);
         }
 
         /// <summary>
         /// 获取知识库中的文档
         /// </summary>
+        /// <param name="accessToken"></param>
+        /// <param name="idOrNameSpace">存储库id或者namespace</param>
         /// <returns></returns>
-        public async Task<object> GetRepoDocs()
+        public async Task<YuqueBaseModel<IEnumerable<YuqueDocModel>>> GetRepoDocs(string accessToken,string idOrNameSpace)
         {
-            return "";
+            SetYuqueAuthHeader(accessToken);
+            var response=await Client.GetAsync($"{_options.ApiUrl}repos/{idOrNameSpace}/docs");
+            ProcessResponse(response.StatusCode);
+            var responseText = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
+            return JsonConvert.DeserializeObject<YuqueBaseModel<IEnumerable<YuqueDocModel>>>(responseText);
         }
+        
+        /// <summary>
+        /// 获取知识库中的文档详情
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <param name="idOrNameSpace"></param>
+        /// <param name="slug"></param>
+        /// <returns></returns>
+        public async Task<YuqueBaseModel<object>> GetRepoDoc(string accessToken,string idOrNameSpace,string slug)
+        {
+            SetYuqueAuthHeader(accessToken);
+            var response=await Client.GetAsync($"{_options.ApiUrl}repos/{idOrNameSpace}/docs/{slug}?format=0");
+            ProcessResponse(response.StatusCode);
+            var responseText = await response.Content.ReadAsStringAsync();
+            _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
+            return JsonConvert.DeserializeObject<YuqueBaseModel<object>>(responseText);
+        }
+        
         
 
         #region private method

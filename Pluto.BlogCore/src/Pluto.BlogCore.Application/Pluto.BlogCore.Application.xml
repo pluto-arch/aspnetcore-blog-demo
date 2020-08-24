@@ -181,122 +181,157 @@
             <param name="cancellationToken">Cancellation token</param>
             <returns>Response from the request</returns>
         </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.Slug">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.UserId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.IsPublic">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.Status">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.ContentUpdatedAt">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel">
             <summary>
             语雀知识库model
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.Id">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.Id">
             <summary>
             仓库编号
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.Type">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.Type">
             <summary>
             类型 [Book - 文档]
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.Slug">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.Slug">
             <summary>
             仓库路径
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.Name">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.Name">
             <summary>
             名称
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.UserId">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.UserId">
             <summary>
             所属的团队/用户编号
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.Description">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.Description">
             <summary>
             介绍
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.CreatorId">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.CreatorId">
             <summary>
             创建人 User Id
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.Public">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.Public">
             <summary>
             是否公开 [true - 公开, false - 私密]
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.ItemCount">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.ItemCount">
             <summary>
             
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.LikeCount">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.LikeCount">
             <summary>
             喜欢数量
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.WatchCount">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.WatchCount">
             <summary>
             订阅数量
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.NameSpace">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.NameSpace">
             <summary>
             仓库完整路径 user.login/book.slug
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Repo.CreatedAt">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueRepoModel.CreatedAt">
             <summary>
             创建时间
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Data">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.Id">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Id">
             <summary>
             用户资料编号
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.Type">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Type">
             <summary>
             类型 [User - 用户, Group - 团队]
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.SpaceId">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.SpaceId">
             <summary>
             企业空间编号
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.AccountId">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.AccountId">
             <summary>
             用户账户编号
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.Login">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Login">
             <summary>
             用户个人路径
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.Name">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Name">
             <summary>
             昵称
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.AvatarUrl">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.AvatarUrl">
             <summary>
             头像 URL
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.BooksCount">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.BooksCount">
             <summary>
             仓库数量
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.Data.PublicBooksCount">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.PublicBooksCount">
             <summary>
             公开仓库数量
             </summary>
@@ -324,10 +359,21 @@
             <param name="page"></param>
             <returns></returns>
         </member>
-        <member name="M:Pluto.BlogCore.Application.HttpServices.YuQueAppService.GetRepoDocs">
+        <member name="M:Pluto.BlogCore.Application.HttpServices.YuQueAppService.GetRepoDocs(System.String,System.String)">
             <summary>
             获取知识库中的文档
             </summary>
+            <param name="accessToken"></param>
+            <param name="idOrNameSpace">存储库id或者namespace</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.HttpServices.YuQueAppService.GetRepoDoc(System.String,System.String,System.String)">
+            <summary>
+            获取知识库中的文档详情
+            </summary>
+            <param name="accessToken"></param>
+            <param name="idOrNameSpace"></param>
+            <param name="slug"></param>
             <returns></returns>
         </member>
         <member name="P:Pluto.BlogCore.Application.Options.YuqueOption.AppName">
@@ -372,6 +418,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Impls.YuqueAuthQueries.GetUserWithTokenAsync(System.String)">
+            <summary>
+            获取accesstoken
+            </summary>
+            <param name="openid"></param>
+            <returns></returns>
+        </member>
         <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries.GetListAsync(System.String,System.Int32,System.Int32)">
             <summary>
             获取列表
@@ -387,6 +440,11 @@
             </summary>
             <param name="id"></param>
             <returns></returns>
+        </member>
+        <member name="T:Pluto.BlogCore.Application.Queries.Interfaces.IYuqueAuthQueries">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:Pluto.BlogCore.Application.ResourceModels.AuthorResourceModel.#ctor(System.String,System.String)">
             <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>

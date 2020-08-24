@@ -5,16 +5,6 @@ namespace Pluto.BlogCore.Application.HttpServices.Models
     public class YuQueUseInfoModel
     {
         /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("data")]
-        public Data Data { get; set; }
-    }
-    
-    //如果好用，请收藏地址，帮忙分享。
-    public class Data
-    {
-        /// <summary>
         /// 用户资料编号
         /// </summary>
         [JsonProperty("id")]
@@ -60,6 +50,5 @@ namespace Pluto.BlogCore.Application.HttpServices.Models
         [JsonProperty("public_books_count")]
         public int PublicBooksCount { get; set; }
     }
- 
     
 }

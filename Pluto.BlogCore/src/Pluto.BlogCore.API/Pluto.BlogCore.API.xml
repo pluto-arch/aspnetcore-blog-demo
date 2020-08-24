@@ -86,10 +86,25 @@
             <param name="state"></param>
             <returns></returns>
         </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.GetRepo(System.String,System.String,System.Int32)">
+        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.GetRepo(System.Int32)">
             <summary>
             获取用户的语雀知识库
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.GetDocs(System.String)">
+            <summary>
+            获取用户的语雀知识库文档
+            </summary>
+            <param name="repoId">知识库id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.SyncDoc(System.String,System.String)">
+            <summary>
+            同步用户的语雀知识库文档详情
+            </summary>
+            <param name="repoId">知识库id</param>
+            <param name="slug">文档slug</param>
             <returns></returns>
         </member>
         <member name="T:Pluto.BlogCore.API.Filters.ModelValidateFilter">

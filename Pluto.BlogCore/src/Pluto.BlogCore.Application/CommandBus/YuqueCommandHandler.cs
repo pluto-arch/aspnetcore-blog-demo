@@ -27,7 +27,7 @@ namespace Pluto.BlogCore.Application.CommandBus
         /// <returns>Response from the request</returns>
         public async Task<bool> Handle(CreateYuqueAuthInfoCommand request, CancellationToken cancellationToken)
         {
-            var model = await _repository.GetFirstOrDefaultAsync(predicate:x => x.PlatformOpenId == request.PlatformOpenId,cancellationToken:cancellationToken);
+            var model = await _repository.GetFirstOrDefaultAsync(predicate:x => x.OpenId == request.OpenId,cancellationToken:cancellationToken);
             if (model==null)
             {
                 await _repository.InsertAsync(new YuqueAuthInfo
@@ -42,6 +42,7 @@ namespace Pluto.BlogCore.Application.CommandBus
                 },cancellationToken);
             } else
             {
+                model.PlatformOpenId = request.PlatformOpenId;
                 model.AccessToken = request.AccessToken;
                 model.PlatformName = request.PlatformName;
                 model.Expired = request.Expired;
