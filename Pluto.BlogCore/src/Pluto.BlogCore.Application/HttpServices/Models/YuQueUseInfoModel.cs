@@ -1,80 +1,64 @@
-﻿namespace Pluto.BlogCore.Application.HttpServices.Models
+﻿using Newtonsoft.Json;
+
+namespace Pluto.BlogCore.Application.HttpServices.Models
 {
     public class YuQueUseInfoModel
     {
         /// <summary>
         /// 
         /// </summary>
-        public Data data { get; set; }
+        [JsonProperty("data")]
+        public Data Data { get; set; }
     }
     
     //如果好用，请收藏地址，帮忙分享。
     public class Data
     {
         /// <summary>
-        /// 
+        /// 用户资料编号
         /// </summary>
-        public string id { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
         /// <summary>
-        /// 
+        /// 类型 [User - 用户, Group - 团队]
         /// </summary>
-        public string type { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
         /// <summary>
-        /// 
+        /// 企业空间编号
         /// </summary>
-        public int space_id { get; set; }
+        [JsonProperty("space_id")]
+        public string SpaceId { get; set; }
         /// <summary>
-        /// 
+        /// 用户账户编号
         /// </summary>
-        public int account_id { get; set; }
+        [JsonProperty("account_id")]
+        public string AccountId { get; set; }
         /// <summary>
-        /// 
+        /// 用户个人路径
         /// </summary>
-        public string login { get; set; }
+        [JsonProperty("login")]
+        public string Login { get; set; }
         /// <summary>
-        /// 张玉龙
+        /// 昵称
         /// </summary>
-        public string name { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
         /// <summary>
-        /// 
+        /// 头像 URL
         /// </summary>
-        public string avatar_url { get; set; }
+        [JsonProperty("avatar_url")]
+        public string AvatarUrl { get; set; }
         /// <summary>
-        /// 
+        /// 仓库数量
         /// </summary>
-        public int books_count { get; set; }
+        [JsonProperty("books_count")]
+        public int BooksCount { get; set; }
         /// <summary>
-        /// 
+        /// 公开仓库数量
         /// </summary>
-        public int public_books_count { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int followers_count { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int following_count { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int @public { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string description { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string created_at { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string updated_at { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string _serializer { get; set; }
+        [JsonProperty("public_books_count")]
+        public int PublicBooksCount { get; set; }
     }
  
     

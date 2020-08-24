@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using MediatR;
@@ -7,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Pluto.BlogCore.API.Models;
+using Pluto.BlogCore.API.Models.Response;
 using Pluto.BlogCore.Application.Commands;
 using Pluto.BlogCore.Application.Commands.Models;
 using Pluto.BlogCore.Application.HttpServices;
@@ -18,7 +21,7 @@ using Pluto.BlogCore.Infrastructure.Providers;
 namespace Pluto.BlogCore.API.Controllers
 {
     [ApiController]
-    [Route("third_auth")]
+    [Route("yuque")]
     public class YuqueController : ApiBaseController<YuqueController>
     {
         private readonly YuQueAppService _yuQueAppService;
@@ -68,11 +71,11 @@ namespace Pluto.BlogCore.API.Controllers
             var userInfo = await _yuQueAppService.GetUserInfoAsync(tokenResponse.AccessToken);
             var command=new CreateYuqueAuthInfoCommand
             {
-                OpenId = userInfo.data.id,
+                OpenId = "PO11212112312",
                 AccessToken = tokenResponse.AccessToken,
                 RefreshToken = "",
-                PlatformOpenId = userInfo.data.id,
-                PlatformName = userInfo.data.name
+                PlatformOpenId = userInfo.Data.AccountId,
+                PlatformName = userInfo.Data.Name
             };
             await _mediator.Send(command);
             return Redirect(callbacks);
@@ -80,14 +83,24 @@ namespace Pluto.BlogCore.API.Controllers
 
 
         /// <summary>
-        /// 获取用户的语雀文档
+        /// 获取用户的语雀知识库
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<ApiResponse<object>> GetDocument(string userid,string accessToken)
+        [HttpPost("repos")]
+        public async Task<ApiResponse<IEnumerable<YuqueRepoResponse>>> GetRepo(string userid,string accessToken,int page)
         {
-            var repos =await _yuQueAppService.GetUserRepos(userid, accessToken);
-            return ApiResponse<object>.Success(repos);
+            var repos =await _yuQueAppService.GetUserRepos(userid, accessToken,page);
+            var response = from repo in repos.Repos
+                           select new YuqueRepoResponse
+                           {
+                               Id = repo.Id,
+                               Type = repo.Type,
+                               Name = repo.Name,
+                               Public = repo.Public,
+                               NameSpace = repo.NameSpace,
+                               CreatedAt =repo.CreatedAt 
+                           };
+            return ApiResponse<IEnumerable<YuqueRepoResponse>>.Success(response);
         }
         
     }
