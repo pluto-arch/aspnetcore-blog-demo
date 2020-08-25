@@ -152,6 +152,9 @@ namespace Pluto.BlogCore.API.Controllers
                 return ApiResponse<object>.Fail("获取token失败");
             }
             var repos =await _yuQueAppService.GetRepoDoc(info.token, repoId,slug);
+            
+            
+            
             return ApiResponse<object>.Success(repos.Data);
         }
     }

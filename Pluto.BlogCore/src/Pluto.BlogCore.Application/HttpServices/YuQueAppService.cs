@@ -112,14 +112,14 @@ namespace Pluto.BlogCore.Application.HttpServices
         /// <param name="idOrNameSpace"></param>
         /// <param name="slug"></param>
         /// <returns></returns>
-        public async Task<YuqueBaseModel<object>> GetRepoDoc(string accessToken,string idOrNameSpace,string slug)
+        public async Task<YuqueBaseModel<YuqueDocDetailModel>> GetRepoDoc(string accessToken,string idOrNameSpace,string slug)
         {
             SetYuqueAuthHeader(accessToken);
             var response=await Client.GetAsync($"{_options.ApiUrl}repos/{idOrNameSpace}/docs/{slug}?format=0");
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
             _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
-            return JsonConvert.DeserializeObject<YuqueBaseModel<object>>(responseText);
+            return JsonConvert.DeserializeObject<YuqueBaseModel<YuqueDocDetailModel>>(responseText);
         }
         
         
