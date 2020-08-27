@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pluto.BlogCore.Domain.DomainModels.ThirsOauth
+namespace Pluto.BlogCore.Domain.DomainModels.Yuque
 {
     public class YuqueAuthInfo:BaseEntity<int>
     {
@@ -34,6 +34,10 @@ namespace Pluto.BlogCore.Domain.DomainModels.ThirsOauth
         /// </summary>
         public DateTime? Expired { get; set; }
 
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string Avator { get; set; }
         
     }
 }

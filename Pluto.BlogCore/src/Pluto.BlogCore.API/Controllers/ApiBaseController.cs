@@ -39,5 +39,6 @@ namespace Pluto.BlogCore.API.Controllers
             _logger = logger;
             _eventIdProvider = eventIdProvider;
         }
+
     }
 }

@@ -10,39 +10,27 @@ namespace Pluto.BlogCore.Domain.DomainModels.Blog
 		/// openid
 		/// </summary>
 		public string OpenId { get; private set; }
-		/// <summary>
-		/// 名称
-		/// </summary>
-		public string Name { get; private set; }
-		/// <summary>
-		/// 头像
-		/// </summary>
-		public string Avatar { get; private set; }
 
+		/// <summary>
+		/// 第三方openid
+		/// </summary>
+		public string ThirdOpenid { get; set; }
 
 		/// <summary>
 		/// 初始化 <see cref="Author"/> 的新实例
 		/// </summary>
 		public Author() { }
 
-		/// <summary>
-		/// 初始化 <see cref="Author"/> 的新实例
-		/// </summary>
-		/// <param name="openId"></param>
-		/// <param name="name"></param>
-		/// <param name="avatar"></param>
-		public Author(string openId, string name, string avatar)
+		public Author(string openId, string thirdOpenid)
 		{
 			OpenId = openId;
-			Name = name;
-			Avatar = avatar;
+			ThirdOpenid = thirdOpenid;
 		}
 
 		protected override IEnumerable<object> GetAtomicValues()
 		{
 			yield return OpenId;
-			yield return Name;
-			yield return Avatar;
+			yield return ThirdOpenid;
 		}
 	}
 }

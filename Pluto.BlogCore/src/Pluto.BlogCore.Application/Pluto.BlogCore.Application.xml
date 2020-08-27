@@ -113,23 +113,46 @@
             平台用户标识
             </summary>
         </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.CreateYuqueAuthInfoCommand.Avator">
+            <summary>
+            语雀用户头像
+            </summary>
+        </member>
         <member name="P:Pluto.BlogCore.Application.Commands.Models.AuthorModel.OpenId">
             <summary>
             openid
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.Models.AuthorModel.Name">
+        <member name="P:Pluto.BlogCore.Application.Commands.Models.AuthorModel.ThirdOpenId">
             <summary>
             名称
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.Commands.Models.AuthorModel.Avatar">
+        <member name="M:Pluto.BlogCore.Application.Commands.Models.AuthorModel.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Commands.SyncYuqueDocCommand.#ctor(System.String,System.String,System.Nullable{System.Int64},Pluto.BlogCore.Application.Commands.Models.AuthorModel,System.String,System.String,Pluto.BlogCore.Domain.DomainModels.Blog.EnumContentFormat,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.SyncYuqueDocCommand.Title">
             <summary>
-            头像
+            标题
             </summary>
         </member>
-        <member name="M:Pluto.BlogCore.Application.Commands.Models.AuthorModel.#ctor(System.String,System.String,System.String)">
-            <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        <member name="P:Pluto.BlogCore.Application.Commands.SyncYuqueDocCommand.Summary">
+            <summary>
+            摘要
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.SyncYuqueDocCommand.CategoryId">
+            <summary>
+            所属分类
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.Commands.SyncYuqueDocCommand.Author">
+            <summary>
+            作者
+            </summary>
         </member>
         <member name="M:Pluto.BlogCore.Application.CommandBus.CreateCategoryCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreateCategoryCommand,System.Threading.CancellationToken)">
             <summary>Handles a request</summary>
@@ -176,10 +199,56 @@
             <returns></returns>
         </member>
         <member name="M:Pluto.BlogCore.Application.CommandBus.YuqueCommandHandler.Handle(Pluto.BlogCore.Application.Commands.CreateYuqueAuthInfoCommand,System.Threading.CancellationToken)">
-            <summary>Handles a request</summary>
+            <summary>创建/修改语雀用户信息</summary>
             <param name="request">The request</param>
             <param name="cancellationToken">Cancellation token</param>
             <returns>Response from the request</returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.CommandBus.YuqueCommandHandler.Handle(Pluto.BlogCore.Application.Commands.SyncYuqueDocCommand,System.Threading.CancellationToken)">
+            <summary>语雀稿件同步</summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Response from the request</returns>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.Id">
+            <summary>
+            doc id
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.Slug">
+            <summary>
+            doc 标识
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.Format">
+            <summary>
+            格式化类型 lake , markdown
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.BodyHtml">
+            <summary>
+            html 内容
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.PublishedAt">
+            <summary>
+            发布时间
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.Description">
+            <summary>
+            摘要
+            </summary>
+        </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.UserId">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.Id">
             <summary>
@@ -291,47 +360,47 @@
             创建时间
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Id">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.Id">
             <summary>
             用户资料编号
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Type">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.Type">
             <summary>
             类型 [User - 用户, Group - 团队]
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.SpaceId">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.SpaceId">
             <summary>
             企业空间编号
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.AccountId">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.AccountId">
             <summary>
             用户账户编号
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Login">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.Login">
             <summary>
             用户个人路径
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.Name">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.Name">
             <summary>
             昵称
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.AvatarUrl">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.AvatarUrl">
             <summary>
             头像 URL
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.BooksCount">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.BooksCount">
             <summary>
             仓库数量
             </summary>
         </member>
-        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuQueUseInfoModel.PublicBooksCount">
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueUseInfoModel.PublicBooksCount">
             <summary>
             公开仓库数量
             </summary>
@@ -418,6 +487,33 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Impls.PostQueries.GetPostCategory(System.Nullable{System.Int64})">
+            <summary>
+            获取类目
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Impls.PostQueries.GetByPlatformAsync(Pluto.BlogCore.Domain.DomainModels.Blog.EnumPlatform,System.String)">
+            <summary>
+            根据平台类型查询
+            </summary>
+            <param name="platform"></param>
+            <param name="dataId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Impls.PostQueries.GetCategorysAsync">
+            <summary>
+            获取所有分类
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Impls.PostQueries.GetCategoryByNameAsync(System.String)">
+            <summary>
+            获取分类
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Pluto.BlogCore.Application.Queries.Impls.YuqueAuthQueries.GetUserWithTokenAsync(System.String)">
             <summary>
             获取accesstoken
@@ -439,6 +535,33 @@
             查询详情
             </summary>
             <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries.GetPostCategory(System.Nullable{System.Int64})">
+            <summary>
+            获取类目
+            </summary>
+            <param name="categoryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries.GetByPlatformAsync(Pluto.BlogCore.Domain.DomainModels.Blog.EnumPlatform,System.String)">
+            <summary>
+            根据平台类型查询
+            </summary>
+            <param name="platform"></param>
+            <param name="dataId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries.GetCategorysAsync">
+            <summary>
+            获取所有分类
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Pluto.BlogCore.Application.Queries.Interfaces.IPostQueries.GetCategoryByNameAsync(System.String)">
+            <summary>
+            获取分类
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Pluto.BlogCore.Application.Queries.Interfaces.IYuqueAuthQueries">

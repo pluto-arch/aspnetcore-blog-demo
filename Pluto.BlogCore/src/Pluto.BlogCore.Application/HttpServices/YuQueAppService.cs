@@ -52,7 +52,7 @@ namespace Pluto.BlogCore.Application.HttpServices
             var response=await Client.PostAsync($"{_options.AuthUrl}token",content);
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation($"语雀获取token返回数据：{responseText}");
+            _logger.LogInformation("[语雀]获取token返回数据：{@responseText}",responseText);
             return JsonConvert.DeserializeObject<YuQueAccessTokenModel>(responseText);
         }
 
@@ -61,14 +61,14 @@ namespace Pluto.BlogCore.Application.HttpServices
         /// </summary>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        public async Task<YuqueBaseModel<YuQueUseInfoModel>> GetUserInfoAsync(string accessToken)
+        public async Task<YuqueBaseModel<YuqueUseInfoModel>> GetUserInfoAsync(string accessToken)
         {
             SetYuqueAuthHeader(accessToken);
             var response=await Client.GetAsync($"{_options.ApiUrl}user");
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
-            return JsonConvert.DeserializeObject<YuqueBaseModel<YuQueUseInfoModel>>(responseText);
+            _logger.LogInformation("[语雀]获取用户信息返回数据：{@responseText}",responseText);
+            return JsonConvert.DeserializeObject<YuqueBaseModel<YuqueUseInfoModel>>(responseText);
         }
 
 
@@ -85,7 +85,7 @@ namespace Pluto.BlogCore.Application.HttpServices
             var response=await Client.GetAsync($"{_options.ApiUrl}users/{id}/repos?type=all&offset={page-1}");
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
+            _logger.LogInformation("[语雀]获取用户知识库返回数据：{@responseText}",responseText);
             return JsonConvert.DeserializeObject<YuqueBaseModel<IEnumerable<YuqueRepoModel>>>(responseText);
         }
 
@@ -101,7 +101,7 @@ namespace Pluto.BlogCore.Application.HttpServices
             var response=await Client.GetAsync($"{_options.ApiUrl}repos/{idOrNameSpace}/docs");
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
+            _logger.LogInformation("[语雀]获取知识库中的文档返回数据：{@responseText}",responseText);
             return JsonConvert.DeserializeObject<YuqueBaseModel<IEnumerable<YuqueDocModel>>>(responseText);
         }
         
@@ -118,7 +118,7 @@ namespace Pluto.BlogCore.Application.HttpServices
             var response=await Client.GetAsync($"{_options.ApiUrl}repos/{idOrNameSpace}/docs/{slug}?format=0");
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation($"语雀获取用户信息返回数据：{responseText}");
+            _logger.LogInformation("[语雀]获取用户信息返回数据：{@responseText}",responseText);
             return JsonConvert.DeserializeObject<YuqueBaseModel<YuqueDocDetailModel>>(responseText);
         }
         

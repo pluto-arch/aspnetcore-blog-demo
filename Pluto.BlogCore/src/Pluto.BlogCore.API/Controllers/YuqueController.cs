@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Web;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Pluto.BlogCore.API.Models;
@@ -16,7 +15,7 @@ using Pluto.BlogCore.Application.HttpServices;
 using Pluto.BlogCore.Application.HttpServices.Models;
 using Pluto.BlogCore.Application.Options;
 using Pluto.BlogCore.Application.Queries.Interfaces;
-using Pluto.BlogCore.Domain.DomainModels.ThirsOauth;
+using Pluto.BlogCore.Domain.DomainModels.Blog;
 using Pluto.BlogCore.Infrastructure.Extensions;
 using Pluto.BlogCore.Infrastructure.Providers;
 
@@ -29,15 +28,19 @@ namespace Pluto.BlogCore.API.Controllers
         private readonly YuQueAppService _yuQueAppService;
         private readonly YuqueOption _options;
         private readonly IYuqueAuthQueries _yuqueAuthQueries;
+        private readonly IPostQueries _postQueries;
 
         public YuqueController(IMediator mediator,
                                ILogger<YuqueController> logger,
                                EventIdProvider eventIdProvider,
                                YuQueAppService yuQueAppService,
-                               IOptions<YuqueOption> options, IYuqueAuthQueries yuqueAuthQueries) : base(mediator, logger, eventIdProvider)
+                               IOptions<YuqueOption> options,
+                               IYuqueAuthQueries yuqueAuthQueries,
+                               IPostQueries postQueries) : base(mediator, logger, eventIdProvider)
         {
             _yuQueAppService = yuQueAppService;
             _yuqueAuthQueries = yuqueAuthQueries;
+            _postQueries = postQueries;
             _options = options.Value;
         }
 
@@ -47,10 +50,10 @@ namespace Pluto.BlogCore.API.Controllers
         /// <param name="callback">授权回调后的地址</param>
         /// <returns></returns>
         [HttpGet("yuque_auth_url")]
-        public ApiResponse<string> GetYuqueAuthUrl(string callback)
+        public IActionResult GetYuqueAuthUrl(string callback)
         {
             var res = _yuQueAppService.GetOauthAuthorizeUrl(callback);
-            return ApiResponse<string>.Success(res);
+            return Ok(ApiResponse.SuccessData(res));
         }
 
         /// <summary>
@@ -63,23 +66,26 @@ namespace Pluto.BlogCore.API.Controllers
         public async Task<IActionResult> YuqueAuthRedirect(string code, string state)
         {
             var callbacks = _options.CallbackUrl;
-            if (!string.IsNullOrEmpty(state)&&state.IsUrl())
+            if (!string.IsNullOrEmpty(state) && state.IsUrl())
             {
                 callbacks = HttpUtility.UrlDecode(state);
             }
+
             var tokenResponse = await _yuQueAppService.GetAccessToken(code);
             if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.AccessToken))
             {
                 return Redirect(callbacks);
             }
+
             var userInfo = await _yuQueAppService.GetUserInfoAsync(tokenResponse.AccessToken);
-            var command=new CreateYuqueAuthInfoCommand
+            var command = new CreateYuqueAuthInfoCommand
             {
                 OpenId = "PO11212112312",
                 AccessToken = tokenResponse.AccessToken,
                 RefreshToken = "",
                 PlatformOpenId = userInfo.Data.Id,
-                PlatformName = userInfo.Data.Name
+                PlatformName = userInfo.Data.Name,
+                Avator = userInfo.Data.AvatarUrl
             };
             await _mediator.Send(command);
             return Redirect(callbacks);
@@ -91,19 +97,21 @@ namespace Pluto.BlogCore.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("repos")]
-        public async Task<ApiResponse<IEnumerable<YuqueRepoResponse>>> GetRepo(int page)
+        public async Task<IActionResult> GetRepo(int page)
         {
-            if (page<=0)
+            if (page <= 0)
             {
-                return ApiResponse<IEnumerable<YuqueRepoResponse>>.Fail("页码错误");
+                return BadRequest(ApiResponse.ErrorData("页码必须大于0"));
             }
+
             string userid = "PO11212112312";
-            var info =await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
+            var info = await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
             if (string.IsNullOrEmpty(info.token))
             {
-                return ApiResponse<IEnumerable<YuqueRepoResponse>>.Fail("获取token失败");
+                return Unauthorized(ApiResponse.ErrorData("token不存在"));
             }
-            var repos =await _yuQueAppService.GetUserRepos(info.userId, info.token,page);
+
+            var repos = await _yuQueAppService.GetUserRepos(info.userId, info.token, page);
             var response = from repo in repos.Data
                            select new YuqueRepoResponse
                            {
@@ -112,50 +120,54 @@ namespace Pluto.BlogCore.API.Controllers
                                Name = repo.Name,
                                Public = repo.Public,
                                NameSpace = repo.NameSpace,
-                               CreatedAt =repo.CreatedAt 
+                               CreatedAt = repo.CreatedAt
                            };
-            return ApiResponse<IEnumerable<YuqueRepoResponse>>.Success(response);
+            return Ok(ApiResponse.SuccessData(response));
         }
-        
-        
+
+
         /// <summary>
         /// 获取用户的语雀知识库文档
         /// </summary>
         /// <param name="repoId">知识库id</param>
         /// <returns></returns>
         [HttpGet("repos/{repoId}/docs")]
-        public async Task<ApiResponse<IEnumerable<YuqueDocModel>>> GetDocs(string repoId)
+        public async Task<IActionResult> GetDocs(string repoId)
         {
             string userid = "PO11212112312";
-            var info =await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
+            var info = await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
             if (string.IsNullOrEmpty(info.token))
             {
-                return ApiResponse<IEnumerable<YuqueDocModel>>.Fail("获取token失败");
+                return Unauthorized(ApiResponse.ErrorData("token不存在,请重新授权"));
             }
-            var repos =await _yuQueAppService.GetRepoDocs(info.token, repoId);
-            return ApiResponse<IEnumerable<YuqueDocModel>>.Success(repos.Data);
+
+            var repos = await _yuQueAppService.GetRepoDocs(info.token, repoId);
+            return Ok(ApiResponse.SuccessData(repos.Data));
         }
-        
+
         /// <summary>
         /// 同步用户的语雀知识库文档详情
         /// </summary>
         /// <param name="repoId">知识库id</param>
         /// <param name="slug">文档slug</param>
+        /// <param name="categoryId"></param>
         /// <returns></returns>
         [HttpGet("repos/{repoId}/docs/{slug}")]
-        public async Task<ApiResponse<object>> SyncDoc(string repoId,string slug)
+        public async Task<IActionResult> SyncDoc(string repoId, string slug, long? categoryId)
         {
             string userid = "PO11212112312";
-            var info =await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
+            var info = await _yuqueAuthQueries.GetUserWithTokenAsync(userid);
             if (string.IsNullOrEmpty(info.token))
             {
-                return ApiResponse<object>.Fail("获取token失败");
+                return Unauthorized(ApiResponse.ErrorData("token不存在,请重新授权"));
             }
-            var repos =await _yuQueAppService.GetRepoDoc(info.token, repoId,slug);
-            
-            
-            
-            return ApiResponse<object>.Success(repos.Data);
+
+            var repos = await _yuQueAppService.GetRepoDoc(info.token, repoId, slug);
+            var doc = repos.Data;
+            var author = new AuthorModel(userid, doc.UserId);
+            var res= await _mediator.Send(new SyncYuqueDocCommand(doc.Title, doc.Description, categoryId, author, doc.BodyHtml,
+                                                         string.Empty, EnumContentFormat.Lake, doc.Slug));
+            return Ok(ApiResponse.SuccessData(res));
         }
     }
 }

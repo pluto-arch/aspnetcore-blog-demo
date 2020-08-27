@@ -21,6 +21,30 @@ namespace Pluto.BlogCore.Domain.DomainModels.Blog
 			Author = author;
 		}
 
+		public Post(
+			string title, 
+			string summary, 
+			Category category, 
+			EnumPostStatus status, 
+			EnumPostType postType, 
+			string htmlContent, 
+			string markdownContent, 
+			string link, 
+			ContentPlatformInfo platformInfo, 
+			Author author)
+		{
+			Title = title;
+			Summary = summary;
+			Category = category;
+			Status = status;
+			PostType = postType;
+			HtmlContent = htmlContent;
+			MarkdownContent = markdownContent;
+			Link = link;
+			PlatformInfo = platformInfo;
+			Author = author;
+		}
+
 
 		/// <summary>
 		/// 标题
@@ -41,6 +65,31 @@ namespace Pluto.BlogCore.Domain.DomainModels.Blog
 		/// 状态
 		/// </summary>
 		public EnumPostStatus Status { get; set; }
+
+		/// <summary>
+		/// 类型
+		/// </summary>
+		public EnumPostType PostType { get; set; }
+
+		/// <summary>
+		/// html原始内容
+		/// </summary>
+		public string HtmlContent { get; set; }
+
+		/// <summary>
+		/// markodwn内容
+		/// </summary>
+		public string MarkdownContent { get; set; }
+
+		/// <summary>
+		/// 外链
+		/// </summary>
+		public string Link { get; set; }
+
+		/// <summary>
+		/// 平台信息
+		/// </summary>
+		public ContentPlatformInfo PlatformInfo { get; set; }
 
 		/// <summary>
 		/// 作者

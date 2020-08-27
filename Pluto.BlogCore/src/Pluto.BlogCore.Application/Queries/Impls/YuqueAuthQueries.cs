@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pluto.BlogCore.Application.Queries.Interfaces;
-using Pluto.BlogCore.Domain.DomainModels.ThirsOauth;
+using Pluto.BlogCore.Domain.DomainModels.Yuque;
 using Pluto.BlogCore.Infrastructure;
 using PlutoData.Interface;
 

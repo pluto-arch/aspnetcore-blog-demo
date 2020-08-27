@@ -1,6 +1,5 @@
 ﻿using System;
 using MediatR;
-using Pluto.BlogCore.Domain.DomainModels.ThirsOauth;
 
 namespace Pluto.BlogCore.Application.Commands
 {
@@ -33,5 +32,10 @@ namespace Pluto.BlogCore.Application.Commands
         /// 平台用户标识
         /// </summary>
         public string PlatformOpenId { get; set; }
+
+        /// <summary>
+        /// 语雀用户头像
+        /// </summary>
+        public string Avator { get; set; }
     }
 }

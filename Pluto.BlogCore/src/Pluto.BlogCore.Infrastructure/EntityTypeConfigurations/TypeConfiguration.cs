@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pluto.BlogCore.Domain.DomainModels.Blog;
-using Pluto.BlogCore.Domain.DomainModels.ThirsOauth;
+using Pluto.BlogCore.Domain.DomainModels.Yuque;
 
 namespace Pluto.BlogCore.Infrastructure.EntityTypeConfigurations
 {
@@ -26,13 +26,27 @@ namespace Pluto.BlogCore.Infrastructure.EntityTypeConfigurations
 				a.WithOwner();
 				a.Property(x => x.OpenId)
 				 .HasMaxLength(256)
-				 .HasColumnName("AuthorOpenId");
-				a.Property(x => x.Name)
+				 .HasColumnName("OpenId");
+				a.Property(x => x.ThirdOpenid)
 				 .HasMaxLength(256)
-				 .HasColumnName("AuthorName");
-				a.Property(x => x.Avatar)
-				 .HasMaxLength(512)
-				 .HasColumnName("AuthorAvatar");
+				 .HasColumnName("ThirdOpenid");
+			});
+			builder.OwnsOne(x => x.PlatformInfo,a =>
+			{
+				a.WithOwner();
+				a.Property(x => x.PlatformId)
+				 .HasMaxLength(64)
+				 .HasColumnName("PlatformId");
+				
+				a.Property(x => x.Platform)
+				 .HasColumnType("nvarchar(32)")
+				 .HasConversion<string>()
+				 .HasColumnName("Platform");
+				
+				a.Property(x => x.Format)
+				 .HasColumnType("nvarchar(32)")
+				 .HasConversion<string>()
+				 .HasColumnName("Format");
 			});
 
 			builder.Property(x => x.Title)
@@ -43,8 +57,19 @@ namespace Pluto.BlogCore.Infrastructure.EntityTypeConfigurations
 			       .HasMaxLength(1000)
 			       .IsRequired(true);
 
+			builder.Property(x => x.HtmlContent)
+			       .HasColumnType("text");
+			builder.Property(x => x.MarkdownContent)
+			       .HasColumnType("text");
+			builder.Property(x => x.Link)
+			       .HasMaxLength(1000);
+
 			builder.Property(x => x.Status)
 			       .HasColumnType("nvarchar(32)")
+			       .HasConversion<string>();
+			
+			builder.Property(x => x.PostType)
+			       .HasColumnType("nvarchar(16)")
 			       .HasConversion<string>();
 
 			builder.Property(x => x.CreateTime)

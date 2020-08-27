@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Pluto.BlogCore.Domain.DomainModels.Blog
 {
@@ -30,7 +31,7 @@ namespace Pluto.BlogCore.Domain.DomainModels.Blog
 		public string DisplayName { get; set; }
 
 		#region 导航属性
-		public ReadOnlyCollection<Post> Posts { get; set; }
+		public IReadOnlyCollection<Post> Posts { get; set; }
 		#endregion
 	}
 }

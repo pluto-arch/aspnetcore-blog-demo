@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Pluto.BlogCore.API.Models;
 using Pluto.BlogCore.API.Models.Requests;
 using Pluto.BlogCore.Application.Commands;
+using Pluto.BlogCore.Application.Queries.Interfaces;
 using Pluto.BlogCore.Infrastructure.Providers;
 
 namespace Pluto.BlogCore.API.Controllers
@@ -12,17 +13,14 @@ namespace Pluto.BlogCore.API.Controllers
 	[Route("api/category")]
 	public class CategoryController:ApiBaseController<CategoryController>
 	{
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="mediator"></param>
-		/// <param name="logger"></param>
-		/// <param name="eventIdProvider"></param>
+		private readonly IPostQueries _postQueries;
 		public CategoryController(
 			IMediator mediator, 
 			ILogger<CategoryController> logger, 
-			EventIdProvider eventIdProvider) : base(mediator, logger, eventIdProvider)
+			EventIdProvider eventIdProvider,
+			IPostQueries postQueries) : base(mediator, logger, eventIdProvider)
 		{
+			_postQueries = postQueries;
 		}
 
 
@@ -31,9 +29,10 @@ namespace Pluto.BlogCore.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
-		public ApiResponse Get()
+		public async Task<IActionResult> Get()
 		{
-			return ApiResponse.DefaultFail();
+			var list = await _postQueries.GetCategorysAsync();
+			return Ok(ApiResponse.SuccessData(list));
 		}
 		
 		/// <summary>
@@ -41,15 +40,16 @@ namespace Pluto.BlogCore.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpPost]
-		public async Task<ApiResponse> Post(CreateCategoryRequest request)
+		public async Task<IActionResult> Post(CreateCategoryRequest request)
 		{
+			var category = _postQueries.GetCategoryByNameAsync(request.DisplayName);
+			if (category!=null)
+			{
+				return BadRequest(ApiResponse.ErrorData("名称重复"));
+			}
 			var req = new CreateCategoryCommand(request.DisplayName);
 		    var res= await _mediator.Send(req);
-		    if (res)
-		    {
-			    return ApiResponse.DefaultSuccess();
-		    }
-			return ApiResponse.DefaultFail();
+		    return Ok(ApiResponse.SuccessData(res));
 		}
 		
 		

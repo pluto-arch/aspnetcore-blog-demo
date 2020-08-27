@@ -43,7 +43,7 @@ namespace Pluto.BlogCore.API.Filters
 				}
 
 				context.Result =
-					new JsonResult(ApiResponse.Fail(AppResponseCode.InvalidParameter, string.Join("|", errors)));
+					new JsonResult(ApiResponse.ErrorData(string.Join("|", errors)));
 			}
 		}
 	}

@@ -9,14 +9,15 @@
 		}
 
 		/// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-		public AuthorResourceModel(string openId, string authorName)
+		public AuthorResourceModel(string openId, string thirdOpenId)
 		{
 			OpenId = openId;
-			AuthorName = authorName;
+			ThirdOpenId = thirdOpenId;
 		}
 
 		public string OpenId { get; set; }
+		public string ThirdOpenId { get; set; }
 
-		public string AuthorName { get; set; }
+		public string UserName { get; set; }
 	}
 }

@@ -77,6 +77,6 @@ namespace Pluto.BlogCore.Application.HttpServices.Models
         public DateTime CreatedAt { get; set; }
         
         [JsonProperty("user")]
-        public YuQueUseInfoModel User { get; set; }
+        public YuqueUseInfoModel User { get; set; }
     }
 }

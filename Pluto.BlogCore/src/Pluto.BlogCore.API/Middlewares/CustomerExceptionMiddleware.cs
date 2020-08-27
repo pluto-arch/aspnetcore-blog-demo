@@ -65,7 +65,7 @@ namespace Pluto.BlogCore.API.Middlewares
 		{
 			context.Response.ContentType = "application/json;charset=utf-8";
 			context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-			var apiResponse = ApiResponse.DefaultFail(e.Message);
+			var apiResponse = ApiResponse.ErrorData(e.Message);
 			var serializerResult = JsonConvert.SerializeObject(apiResponse);
 			await context.Response.WriteAsync(serializerResult);
 		}

@@ -46,5 +46,11 @@ namespace Pluto.BlogCore.Application.HttpServices.Models
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [JsonProperty("user_id")]
+        public string UserId { get; set; }
     }
 }

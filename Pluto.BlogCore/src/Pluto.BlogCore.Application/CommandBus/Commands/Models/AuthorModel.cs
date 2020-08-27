@@ -9,18 +9,13 @@
 		/// <summary>
 		/// 名称
 		/// </summary>
-		public string Name { get; private set; }
-		/// <summary>
-		/// 头像
-		/// </summary>
-		public string Avatar { get; private set; }
+		public string ThirdOpenId { get; private set; }
 
 		/// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
-		public AuthorModel(string openId, string name, string avatar)
+		public AuthorModel(string openId, string thirdOpenId)
 		{
 			OpenId = openId;
-			Name = name;
-			Avatar = avatar;
+			ThirdOpenId = thirdOpenId;
 		}
 
 		public AuthorModel()

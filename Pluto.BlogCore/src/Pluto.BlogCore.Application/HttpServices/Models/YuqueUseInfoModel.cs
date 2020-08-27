@@ -2,7 +2,7 @@
 
 namespace Pluto.BlogCore.Application.HttpServices.Models
 {
-    public class YuQueUseInfoModel
+    public class YuqueUseInfoModel
     {
         /// <summary>
         /// 用户资料编号

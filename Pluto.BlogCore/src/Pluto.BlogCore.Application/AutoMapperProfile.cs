@@ -14,8 +14,18 @@ namespace Pluto.BlogCore.Application
     {
         public AutoMapperProfile()
         {
+            #region inpur
             CreateMap<AuthorModel, Author>()
-                .ConstructUsing(x=>new Author(x.OpenId,x.Name,x.Avatar));
+                .ConstructUsing(x=>new Author(x.OpenId,x.ThirdOpenId));
+            
+
+            #endregion
+
+            #region output
+
+            CreateMap<Category, CategoryModel>()
+                .ForMember(x=>x.Id,o=>o.MapFrom(s=>s.Id))
+                .ForMember(x=>x.DisplayName,o=>o.MapFrom(s=>s.DisplayName));
 
             CreateMap<Post, PostListItemModel>()
                 .ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
@@ -25,6 +35,9 @@ namespace Pluto.BlogCore.Application
                 .ForMember(x=>x.Summary,o=>o.MapFrom(z=>z.Summary))
                 .ForMember(x=>x.CreateTime,o=>o.MapFrom(z=>z.CreateTime))
                 .ForMember(x=>x.Tags,o=>o.MapFrom(z=>MapPostTag(z.PostTags)));
+
+            #endregion
+            
         }
 
         private IEnumerable<TagModel> MapPostTag(IEnumerable<PostTag> postTags)
@@ -51,7 +64,7 @@ namespace Pluto.BlogCore.Application
             {
                 return null;
             }
-            return new AuthorResourceModel(author.OpenId,author.Name);
+            return new AuthorResourceModel(author.OpenId,author.ThirdOpenid);
         }
 
         private CategoryModel MapPostCategory(Category category)

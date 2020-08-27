@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -35,14 +37,10 @@ namespace Pluto.BlogCore.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet]
-		public async Task<ApiResponse<IPagedList<PostListItemModel>>> Get(string keyWord,int pageIndex,int pageSize)
+		public async Task<IActionResult> Get(string keyWord,[Required,Range(1,int.MaxValue)]int pageIndex,[Required,Range(1,100)]int pageSize)
 		{
-			if (pageIndex<=0||pageSize<=0)
-			{
-				return ApiResponse<IPagedList<PostListItemModel>>.Fail("暂无数据");
-			}
 			var list = await _postQueries.GetListAsync(keyWord,pageIndex,pageSize);
-			return ApiResponse<IPagedList<PostListItemModel>>.Success(list);
+			return Ok(ApiResponse.SuccessData(list));
 		}
 		
 		
@@ -51,14 +49,14 @@ namespace Pluto.BlogCore.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet("{id}")]
-		public async Task<ApiResponse<PostListItemModel>> Get(long id)
+		public async Task<IActionResult> Get([Required,Range(1,Int32.MaxValue)]long id)
 		{
 			if (id<=0)
 			{
-				return ApiResponse<PostListItemModel>.Fail("暂无数据");
+				return BadRequest(ApiResponse.ErrorData("请求参数不正确"));
 			}
 			var model= await _postQueries.GetAsync(id);
-			return ApiResponse<PostListItemModel>.Success(model);
+			return Ok(ApiResponse.SuccessData(model));
 		}
 		
 		
@@ -67,21 +65,17 @@ namespace Pluto.BlogCore.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpPost]
-		public async Task<ApiResponse<bool>> Post(CreatePostRequest request)
+		public async Task<IActionResult> Post(CreatePostRequest request)
 		{
 			var command=new CreatePostCommand(
 			                                  request.Title,
 			                                  request.Summary,
 			                                  request.CategoryId,
-			                                  new AuthorModel("admin","admin","admin"), 
+			                                  new AuthorModel("admin","admin"), 
 			                                  request.Tags,
 			                                  request.IsSubmit);
 			var response= await _mediator.Send(command);
-			if (response)
-			{
-				return ApiResponse<bool>.Success(true);
-			}
-			return ApiResponse<bool>.Fail();
+			return Ok(ApiResponse.SuccessData(response));
 		}
 		
 		

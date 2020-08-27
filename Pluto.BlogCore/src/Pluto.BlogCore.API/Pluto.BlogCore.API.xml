@@ -33,14 +33,6 @@
             <param name="logger"></param>
             <param name="eventIdProvider"></param>
         </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.CategoryController.#ctor(MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{Pluto.BlogCore.API.Controllers.CategoryController},Pluto.BlogCore.Infrastructure.Providers.EventIdProvider)">
-            <summary>
-            
-            </summary>
-            <param name="mediator"></param>
-            <param name="logger"></param>
-            <param name="eventIdProvider"></param>
-        </member>
         <member name="M:Pluto.BlogCore.API.Controllers.CategoryController.Get">
             <summary>
             获取全部分类
@@ -99,12 +91,13 @@
             <param name="repoId">知识库id</param>
             <returns></returns>
         </member>
-        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.SyncDoc(System.String,System.String)">
+        <member name="M:Pluto.BlogCore.API.Controllers.YuqueController.SyncDoc(System.String,System.String,System.Nullable{System.Int64})">
             <summary>
             同步用户的语雀知识库文档详情
             </summary>
             <param name="repoId">知识库id</param>
             <param name="slug">文档slug</param>
+            <param name="categoryId"></param>
             <returns></returns>
         </member>
         <member name="T:Pluto.BlogCore.API.Filters.ModelValidateFilter">
@@ -147,101 +140,20 @@
             接口response
             </summary>
         </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponse.#ctor(System.String,System.String)">
+        <member name="M:Pluto.BlogCore.API.Models.ApiResponse.SuccessData``1(``0)">
             <summary>
-            初始化ApiResponse的实例
+            执行成功的返回值
             </summary>
-            <param name="code"><see cref="T:Pluto.BlogCore.API.Models.AppResponseCode"/></param>
-            <param name="msg"></param>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.ApiResponse.Code">
-            <summary>
-            响应码<see cref="T:Pluto.BlogCore.API.Models.AppResponseCode"/>
-            </summary>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.ApiResponse.Message">
-            <summary>
-            提示信息
-            </summary>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponse.DefaultSuccess(System.String)">
-            <summary>
-            默认成功
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponse.DefaultFail(System.String)">
-            <summary>
-            默认失败
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponse.Fail(System.String,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="code"><see cref="T:Pluto.BlogCore.API.Models.AppResponseCode"/></param>
-            <param name="msg"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Pluto.BlogCore.API.Models.ApiResponse`1">
-            <summary>
-            接口统一返回值
-            </summary>
+            <param name="data"></param>
             <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponse`1.#ctor(System.String,System.String,`0)">
+        <member name="M:Pluto.BlogCore.API.Models.ApiResponse.ErrorData(System.String)">
             <summary>
-            初始化<see>
-                <cref>ApiResponse:T</cref>
-            </see>的实例
+            执行失败的返回值
             </summary>
-            <param name="code"><see cref="T:Pluto.BlogCore.API.Models.AppResponseCode"/></param>
             <param name="msg"></param>
-            <param name="data"></param>
-        </member>
-        <member name="P:Pluto.BlogCore.API.Models.ApiResponse`1.Data">
-            <summary>
-            数据域
-            </summary>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponse`1.Success(`0)">
-            <summary>
-            带数据的成功
-            </summary>
-            <param name="data"></param>
             <returns></returns>
-        </member>
-        <member name="M:Pluto.BlogCore.API.Models.ApiResponse`1.Fail(System.String)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Pluto.BlogCore.API.Models.AppResponseCode">
-            <summary>
-            响应码集合
-            </summary>
-        </member>
-        <member name="F:Pluto.BlogCore.API.Models.AppResponseCode.Success">
-            <summary>
-            成功
-            </summary>
-        </member>
-        <member name="F:Pluto.BlogCore.API.Models.AppResponseCode.Error">
-            <summary>
-            失败
-            </summary>
-        </member>
-        <member name="F:Pluto.BlogCore.API.Models.AppResponseCode.InvalidParameter">
-            <summary>
-            无效参数
-            </summary>
-        </member>
-        <member name="F:Pluto.BlogCore.API.Models.AppResponseCode.ResourceException">
-            <summary>
-            资源异常
-            </summary>
         </member>
         <member name="T:Pluto.BlogCore.API.Models.Requests.CreatePostRequest">
             <summary>
