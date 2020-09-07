@@ -51,6 +51,7 @@ namespace Pluto.BlogCore.Application.CommandBus
                     RefreshToken = request.RefreshToken,
                     Expired = request.Expired,
                     PlatformOpenId = request.PlatformOpenId,
+                    PlatformName = request.PlatformName,
                     Avator = request.Avator
                 },cancellationToken);
             } else
@@ -73,7 +74,8 @@ namespace Pluto.BlogCore.Application.CommandBus
         public async Task<bool> Handle(SyncYuqueDocCommand request, CancellationToken cancellationToken)
         {
             var rep = _unitOfWork.GetBaseRepository<Post>();
-            var category = _postQueries.GetPostCategory(request.CategoryId);
+            var cateRep = _unitOfWork.GetBaseRepository<Category>();
+            var category = cateRep.Find(request.CategoryId);
             var model =await rep.GetFirstOrDefaultAsync(predicate: x
                                                              => x.PlatformInfo!=null&&x.PlatformInfo.Platform == request.Platform
                                                                                     && x.PlatformInfo.PlatformId == request.PlatformId,cancellationToken:cancellationToken);
@@ -100,7 +102,7 @@ namespace Pluto.BlogCore.Application.CommandBus
             {
                 model.Title = request.Title;
                 model.Summary = request.Summary;
-                model.Category = _mapper.Map<Category>(category);
+                model.Category = category;
                 model.HtmlContent = request.HtmlContent;
             }
             return true;

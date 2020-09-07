@@ -62,14 +62,14 @@ namespace Pluto.BlogCore.Application.Queries.Impls
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<PostListItemModel> GetAsync(long id)
+        public async Task<PostItemModel> GetAsync(long id)
         {
             var _postRepository = _unitOfWork.GetRepository<IPostRepository>();
             var res = await _postRepository.GetFirstOrDefaultAsync(predicate: x => x.Id == id,
                                                                    include: x => x.Include(a => a.Category)
                                                                                   .Include(b => b.PostTags)
                                                                                   .ThenInclude(t => t.Tag));
-            return _mapper.Map<PostListItemModel>(res);
+            return _mapper.Map<PostItemModel>(res);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,16 +13,18 @@ namespace Pluto.BlogCore.API.Controllers
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [ApiController]
-    public class ApiBaseController<T>:ControllerBase
+    public class ApiBaseController<T> : ControllerBase
     {
         /// <summary>
         /// 
         /// </summary>
         internal readonly IMediator _mediator;
+
         /// <summary>
         /// 
         /// </summary>
         internal readonly ILogger _logger;
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,5 +43,17 @@ namespace Pluto.BlogCore.API.Controllers
             _eventIdProvider = eventIdProvider;
         }
 
+        protected string UserId
+        {
+            get
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    return User.FindFirst("sub").Value;
+                }
+
+                return string.Empty;
+            }
+        }
     }
 }

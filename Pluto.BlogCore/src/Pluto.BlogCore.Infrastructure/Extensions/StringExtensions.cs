@@ -9,5 +9,11 @@ namespace Pluto.BlogCore.Infrastructure.Extensions
             string pattern = @"^(http|https|ftp)\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&$%\$#\=~])*$";
             return Regex.IsMatch(@this, pattern);
         }
+        public static string GetPara(this string @this, string name)
+        {
+            Regex reg = new Regex(@"(?:^|\?|&)" + name + "=(?<VAL>.+?)(?:&|$)");
+            Match m = reg.Match(@this);
+            return m.Groups["VAL"].ToString(); ;
+        }
     }
 }

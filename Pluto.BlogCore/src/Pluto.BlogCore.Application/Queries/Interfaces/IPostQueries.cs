@@ -22,7 +22,7 @@ namespace Pluto.BlogCore.Application.Queries.Interfaces
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		Task<PostListItemModel> GetAsync(long id);
+		Task<PostItemModel> GetAsync(long id);
 
 		/// <summary>
 		/// 获取类目

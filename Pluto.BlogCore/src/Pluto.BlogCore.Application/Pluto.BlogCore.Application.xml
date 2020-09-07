@@ -250,6 +250,11 @@
             
             </summary>
         </member>
+        <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocDetailModel.IsPublic">
+            <summary>
+            是否是公开文档
+            </summary>
+        </member>
         <member name="P:Pluto.BlogCore.Application.HttpServices.Models.YuqueDocModel.Id">
             <summary>
             

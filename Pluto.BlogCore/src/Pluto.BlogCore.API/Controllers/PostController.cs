@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Pluto.BlogCore.API.Models;
@@ -39,6 +40,10 @@ namespace Pluto.BlogCore.API.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Get(string keyWord,[Required,Range(1,int.MaxValue)]int pageIndex,[Required,Range(1,100)]int pageSize)
 		{
+			if (pageIndex==2)
+			{
+				return NotFound(ApiResponse.ErrorData("数据不存在"));
+			}
 			var list = await _postQueries.GetListAsync(keyWord,pageIndex,pageSize);
 			return Ok(ApiResponse.SuccessData(list));
 		}
@@ -49,13 +54,14 @@ namespace Pluto.BlogCore.API.Controllers
 		/// </summary>
 		/// <returns></returns>
 		[HttpGet("{id}")]
-		public async Task<IActionResult> Get([Required,Range(1,Int32.MaxValue)]long id)
+		public async Task<IActionResult> Get(long id)
 		{
 			if (id<=0)
 			{
 				return BadRequest(ApiResponse.ErrorData("请求参数不正确"));
 			}
 			var model= await _postQueries.GetAsync(id);
+			model.Author.UserName = "admin";
 			return Ok(ApiResponse.SuccessData(model));
 		}
 		

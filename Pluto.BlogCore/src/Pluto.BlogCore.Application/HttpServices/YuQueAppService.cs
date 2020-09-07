@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -21,15 +22,22 @@ namespace Pluto.BlogCore.Application.HttpServices
         public HttpClient Client { get; }
         private readonly ILogger<YuQueAppService> _logger;
         private readonly YuqueOption _options;
-        public YuQueAppService(HttpClient client, ILogger<YuQueAppService> logger,IOptions<YuqueOption> options)
+        private IHttpContextAccessor _httpContextAccessor;
+        public YuQueAppService(HttpClient client, ILogger<YuQueAppService> logger,IOptions<YuqueOption> options, IHttpContextAccessor httpContextAccessor)
         {
             Client = client;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
             _options = options.Value;
         }
 
         public string GetOauthAuthorizeUrl(string callback)
         {
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                var userId = _httpContextAccessor.HttpContext.User.FindFirst("sub")?.Value;
+                callback += $"?userId={userId}";
+            }
             var callbacks = HttpUtility.UrlEncode(callback);
             return
                 $"{_options.AuthUrl}authorize?client_id={_options.ClientId}&scope=repo,doc&redirect_uri={_options.RedirectUrl}&state={callbacks}&response_type=code";
@@ -118,7 +126,7 @@ namespace Pluto.BlogCore.Application.HttpServices
             var response=await Client.GetAsync($"{_options.ApiUrl}repos/{idOrNameSpace}/docs/{slug}?format=0");
             ProcessResponse(response.StatusCode);
             var responseText = await response.Content.ReadAsStringAsync();
-            _logger.LogInformation("[语雀]获取用户信息返回数据：{@responseText}",responseText);
+            _logger.LogInformation("[语雀]获取文档详情返回数据：{@responseText}",responseText);
             return JsonConvert.DeserializeObject<YuqueBaseModel<YuqueDocDetailModel>>(responseText);
         }
         

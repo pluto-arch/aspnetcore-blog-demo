@@ -38,8 +38,16 @@ namespace Pluto.BlogCore.Application.HttpServices.Models
         /// <summary>
         /// 发布时间
         /// </summary>
-        [JsonProperty("published_at")]
+        [JsonProperty("published_at",NullValueHandling = NullValueHandling.Ignore)]
         public DateTime PublishedAt { get; set; }
+        
+        [JsonProperty("created_at")]
+        private DateTime CodeModel2 { set {
+            if (PublishedAt==default)
+            {
+                PublishedAt = value;
+            }
+        } }
 
         /// <summary>
         /// 摘要
@@ -52,5 +60,11 @@ namespace Pluto.BlogCore.Application.HttpServices.Models
         /// </summary>
         [JsonProperty("user_id")]
         public string UserId { get; set; }
+
+        /// <summary>
+        /// 是否是公开文档
+        /// </summary>
+        [JsonProperty("public")]
+        public bool IsPublic { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Pluto.BlogCore.Application.ResourceModels;
 using Pluto.BlogCore.Domain.DomainModels.Blog;
 using PlutoData.Collections;
@@ -35,6 +36,19 @@ namespace Pluto.BlogCore.Application
                 .ForMember(x=>x.Summary,o=>o.MapFrom(z=>z.Summary))
                 .ForMember(x=>x.CreateTime,o=>o.MapFrom(z=>z.CreateTime))
                 .ForMember(x=>x.Tags,o=>o.MapFrom(z=>MapPostTag(z.PostTags)));
+            
+            
+            CreateMap<Post, PostItemModel>()
+                .ForMember(x=>x.Id,o=>o.MapFrom(z=>z.Id))
+                .ForMember(x=>x.Category,o=>o.MapFrom(z=>MapPostCategory(z.Category)))
+                .ForMember(x=>x.Author,o=>o.MapFrom(z=>MapPostAuthor(z.Author)))
+                .ForMember(x=>x.Title,o=>o.MapFrom(z=>z.Title))
+                .ForMember(x=>x.Summary,o=>o.MapFrom(z=>z.Summary))
+                .ForMember(x=>x.CreateTime,o=>o.MapFrom(z=>z.CreateTime))
+                .ForMember(x=>x.HtmlContent,o=>o.MapFrom(z=>z.HtmlContent))
+                .ForMember(x=>x.MarkDownContent,o=>o.MapFrom(z=>z.MarkdownContent))
+                .ForMember(x=>x.Tags,o=>o.MapFrom(z=>MapPostTag(z.PostTags)));
+            
 
             #endregion
             
