@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Pluto.BlogCore.Infrastructure;
+using Winton.Extensions.Configuration.Consul;
 
 namespace Pluto.BlogCore.API
 {
@@ -50,6 +51,21 @@ namespace Pluto.BlogCore.API
         {
             var webHost = WebHost.CreateDefaultBuilder(args)
                 .CaptureStartupErrors(false)
+                .ConfigureAppConfiguration(x =>
+                {
+                    x.AddConfiguration(configuration);
+                    var consulToken = configuration["CONSUL_TOKEN"];
+                    var consulKey = configuration["CONSUL_KEY"];
+                    var consul = configuration["CONSUL_URL"];
+                    x.AddConsul(consulKey, s =>
+                    {
+                        s.ConsulConfigurationOptions = op =>
+                        {
+                            op.Token = consulToken;
+                            op.Address = new Uri(consul);
+                        };
+                    });
+                })
                 .UseIISIntegration()
                 .ConfigureKestrel(options =>
                 {
@@ -63,7 +79,6 @@ namespace Pluto.BlogCore.API
                 .ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseConfiguration(configuration)
                 .UseSerilog()
                 .Build();
 

@@ -1,53 +1,53 @@
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Pluto.BlogCore.API.Middlewares;
-using Pluto.BlogCore.API.Modules;
-using Pluto.BlogCore.Infrastructure;
-using Pluto.BlogCore.Infrastructure.Providers;
-using PlutoData;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
-using System.Runtime.Serialization.Json;
 using System.Security.Claims;
 using System.Threading.Tasks;
+
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+
 using AutoMapper;
-using IdentityModel;
-using IdentityModel.Client;
-using Microsoft.AspNetCore.Authentication;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
 using Pluto.BlogCore.API.Filters;
 using Pluto.BlogCore.API.HealthChecks;
+using Pluto.BlogCore.API.Middlewares;
+using Pluto.BlogCore.API.Modules;
 using Pluto.BlogCore.Application.HttpServices;
-using Pluto.BlogCore.Application.HttpServices.Handlers;
 using Pluto.BlogCore.Application.Options;
 using Pluto.BlogCore.Domain.DomainModels.Blog;
+using Pluto.BlogCore.Infrastructure;
+using Pluto.BlogCore.Infrastructure.Providers;
+
+using PlutoData;
 using PlutoData.Interface;
+
+using Serilog;
+
 using Swashbuckle.AspNetCore.SwaggerGen;
-using ILogger = Serilog.ILogger;
 
 
 namespace Pluto.BlogCore.API

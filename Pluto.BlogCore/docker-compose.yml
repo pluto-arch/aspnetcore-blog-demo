@@ -9,3 +9,7 @@ services:
     build:
       context: .
       dockerfile: src/Pluto.BlogCore.API/Dockerfile
+    environment:
+      - CONSUL_TOKEN=''
+      - CONSUL_KEY=blogCoreAPI
+      - CONSUL_URL=http://www.pluto.icu:8500/

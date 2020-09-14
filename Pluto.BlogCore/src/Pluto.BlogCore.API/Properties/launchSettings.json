@@ -3,9 +3,11 @@
   "profiles": {
     "Pluto.BlogCore.API": {
       "commandName": "Project",
-      "launchBrowser": false,
       "launchUrl": "swagger",
       "environmentVariables": {
+        "CONSUL_TOKEN": "fcd7039e-e761-32ba-a25a-7ce562fd17b3",
+        "CONSUL_KEY": "blogCoreAPI",
+        "CONSUL_URL": "http://www.pluto.icu:8500/",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:5009"
